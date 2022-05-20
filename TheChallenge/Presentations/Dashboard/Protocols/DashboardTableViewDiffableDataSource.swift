@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class DashboardTableViewDiffableDataSource: UITableViewDiffableDataSource<ContentRow, Content> {
+class DashboardTableViewDiffableDataSource: UITableViewDiffableDataSource<ContentRow, [Content]> {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return snapshot().sectionIdentifiers[section].rawValue.uppercased()
     }

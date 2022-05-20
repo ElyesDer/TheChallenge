@@ -20,12 +20,12 @@ class MainCollectionTableViewCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         //        layout.estimatedItemSize = CGSize(width: 70, height: 100)
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 8
+        layout.minimumLineSpacing = 4
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isScrollEnabled = true
-        collectionView.contentInset = .init(top: 0, left: 10, bottom: 0, right: 0)
+        collectionView.contentInset = .init(top: 0, left: 10, bottom: 0, right: 10)
         collectionView.delegate = self
         collectionView.isUserInteractionEnabled = true
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -43,6 +43,8 @@ class MainCollectionTableViewCell: UITableViewCell {
         setUpConstraints()
         setUpViews()
         buildAndApplySnapshot()
+        
+        contentView.debugView()
     }
     
     func setupCollectionView() {
@@ -93,6 +95,6 @@ extension MainCollectionTableViewCell: ViewConstraintAutoLayoutSetup {
 
 extension MainCollectionTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: 140, height: 180)
+        return .init(width: 100, height: 140)
     }
 }

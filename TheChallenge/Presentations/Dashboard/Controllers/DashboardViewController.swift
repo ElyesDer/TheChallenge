@@ -62,7 +62,14 @@ class DashboardViewController: UIViewController {
     }
 }
 
-extension DashboardViewController: UITableViewDelegate { }
+extension DashboardViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+            case 0 : return 200
+            default : return 500
+        }
+    }
+}
 
 extension DashboardViewController: ViewConstraintAutoLayoutSetup {
     func addSubViewsComponents() {
@@ -109,14 +116,14 @@ extension DashboardViewController: ViewConstraintAutoLayoutSetup {
     }
     
     private func buildAndApplySnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<ContentRow, Content>()
+        var snapshot = NSDiffableDataSourceSnapshot<ContentRow, [Content]>()
         
-        snapshot.appendSections(viewModel.structuredRowProvider.map { $0.row })
+        snapshot.appendSections(Array(Set(viewModel.structuredRowProvider.map { $0.row })))
         viewModel.structuredRowProvider.forEach { structuredModel in
-            snapshot.appendItems(structuredModel.content, toSection: structuredModel.row)
+            snapshot.appendItems([structuredModel.content], toSection: structuredModel.row)
         }
         
-        diffableDataSource.apply(snapshot, animatingDifferences: true)
+        diffableDataSource.apply(snapshot, animatingDifferences: false)
     }
     
     @objc

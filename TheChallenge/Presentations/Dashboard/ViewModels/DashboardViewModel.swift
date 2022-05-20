@@ -18,16 +18,25 @@ class DashboardViewModel {
     func load() {
         structuredRowProvider = [
             .init(row: .forYou, content: [
-                .init(isInOffer: true, subtitle: "subtitle", contentID: "contentID_123",
+                .init(isInOffer: true, subtitle: "subtitle", contentID: "contentID_11123",
                       onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
                                      displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: [])
             ]),
             
-            .init(row: .contentRow, content: [
-                .init(isInOffer: true, subtitle: "subtitle", contentID: "contentID_123",
-                      onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                     displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: [])
-            ])
+                .init(row: .contentRow, content: [
+                    .init(isInOffer: true, subtitle: "subtitle", contentID: "contentID_12342",
+                          onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
+                                         displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
+                    
+                        .init(isInOffer: true, subtitle: "subtitle", contentID: "contentID_12334",
+                              onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
+                                             displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
+                    
+                        .init(isInOffer: true, subtitle: "subtitle", contentID: "contentID_12434",
+                              onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
+                                             displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: [])
+                    
+                ]),
         ]
     }
 }
