@@ -17,6 +17,12 @@
 		E9E0D58C283780BF000DA6F6 /* TheChallengeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D58B283780BF000DA6F6 /* TheChallengeUITestsLaunchTests.swift */; };
 		E9E0D5A22837846D000DA6F6 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5A12837846D000DA6F6 /* DashboardViewController.swift */; };
 		E9E0D5A5283784E9000DA6F6 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = E9E0D5A4283784E9000DA6F6 /* Inject */; };
+		E9E0D5A8283786F0000DA6F6 /* Wrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5A7283786F0000DA6F6 /* Wrapper.swift */; };
+		E9E0D5AD2837872D000DA6F6 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5AC2837872D000DA6F6 /* Movie.swift */; };
+		E9E0D5AF28378773000DA6F6 /* ContentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5AE28378773000DA6F6 /* ContentRow.swift */; };
+		E9E0D5B2283789C6000DA6F6 /* Requester.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5B1283789C6000DA6F6 /* Requester.swift */; };
+		E9E0D5B4283789F7000DA6F6 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5B3283789F7000DA6F6 /* APIService.swift */; };
+		E9E0D5B728378B13000DA6F6 /* RequesterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5B628378B13000DA6F6 /* RequesterTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +56,12 @@
 		E9E0D589283780BF000DA6F6 /* TheChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheChallengeUITests.swift; sourceTree = "<group>"; };
 		E9E0D58B283780BF000DA6F6 /* TheChallengeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheChallengeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		E9E0D5A12837846D000DA6F6 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		E9E0D5A7283786F0000DA6F6 /* Wrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wrapper.swift; sourceTree = "<group>"; };
+		E9E0D5AC2837872D000DA6F6 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		E9E0D5AE28378773000DA6F6 /* ContentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRow.swift; sourceTree = "<group>"; };
+		E9E0D5B1283789C6000DA6F6 /* Requester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requester.swift; sourceTree = "<group>"; };
+		E9E0D5B3283789F7000DA6F6 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		E9E0D5B628378B13000DA6F6 /* RequesterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequesterTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +113,8 @@
 		E9E0D564283780BD000DA6F6 /* TheChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				E9E0D5B0283788B9000DA6F6 /* Network */,
+				E9E0D5A62837868A000DA6F6 /* Data */,
 				E9E0D59E28378457000DA6F6 /* Presentations */,
 				E9E0D59928378180000DA6F6 /* Ressources */,
 				E9E0D5982837815E000DA6F6 /* Application */,
@@ -113,6 +127,7 @@
 		E9E0D57E283780BF000DA6F6 /* TheChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
+				E9E0D5B528378AF2000DA6F6 /* NetworkLayer */,
 				E9E0D57F283780BF000DA6F6 /* TheChallengeTests.swift */,
 			);
 			path = TheChallengeTests;
@@ -167,6 +182,49 @@
 				E9E0D5A12837846D000DA6F6 /* DashboardViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E9E0D5A62837868A000DA6F6 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D5AA28378702000DA6F6 /* Entities */,
+				E9E0D5A9283786F8000DA6F6 /* Views */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E9E0D5A9283786F8000DA6F6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D5A7283786F0000DA6F6 /* Wrapper.swift */,
+				E9E0D5AE28378773000DA6F6 /* ContentRow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E9E0D5AA28378702000DA6F6 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D5AC2837872D000DA6F6 /* Movie.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		E9E0D5B0283788B9000DA6F6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D5B1283789C6000DA6F6 /* Requester.swift */,
+				E9E0D5B3283789F7000DA6F6 /* APIService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E9E0D5B528378AF2000DA6F6 /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D5B628378B13000DA6F6 /* RequesterTest.swift */,
+			);
+			path = NetworkLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,7 +386,12 @@
 			files = (
 				E9E0D570283780BD000DA6F6 /* TheChallenge.xcdatamodeld in Sources */,
 				E9E0D566283780BD000DA6F6 /* AppDelegate.swift in Sources */,
+				E9E0D5B2283789C6000DA6F6 /* Requester.swift in Sources */,
+				E9E0D5AF28378773000DA6F6 /* ContentRow.swift in Sources */,
+				E9E0D5AD2837872D000DA6F6 /* Movie.swift in Sources */,
+				E9E0D5A8283786F0000DA6F6 /* Wrapper.swift in Sources */,
 				E9E0D568283780BD000DA6F6 /* SceneDelegate.swift in Sources */,
+				E9E0D5B4283789F7000DA6F6 /* APIService.swift in Sources */,
 				E9E0D5A22837846D000DA6F6 /* DashboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,6 +400,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9E0D5B728378B13000DA6F6 /* RequesterTest.swift in Sources */,
 				E9E0D580283780BF000DA6F6 /* TheChallengeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,7 +491,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -481,7 +545,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
