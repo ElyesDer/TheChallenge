@@ -11,7 +11,7 @@ import UIKit
 class MainCollectionDiffableDataSource: UICollectionViewDiffableDataSource<Int, Content> {}
 
 class MainCollectionTableViewCell: UITableViewCell {
-
+    
     static let identifier = "MainCollectionTableViewCell"
     
     lazy var collectionView: UICollectionView = {
@@ -36,8 +36,11 @@ class MainCollectionTableViewCell: UITableViewCell {
     
     var diffableDataSource: MainCollectionDiffableDataSource!
     
-    func setup(with content: [Content]) {
+    weak var gestureDelegate: GenericViewGestureHandler?
+    
+    func setup(with content: [Content], gestureDelegate: GenericViewGestureHandler) {
         self.contents = content
+        self.gestureDelegate = gestureDelegate
         
         addSubViewsComponents()
         setUpConstraints()
@@ -72,7 +75,7 @@ class MainCollectionTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
 }
@@ -94,5 +97,21 @@ extension MainCollectionTableViewCell: ViewConstraintAutoLayoutSetup {
 extension MainCollectionTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: 120, height: 140)
+    }
+}
+
+extension MainCollectionTableViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = self.contents[indexPath.row]
+        switch item.onClick.displayTemplate {
+            case .detailPage :
+                // go details
+                gestureDelegate?.showDetails(item)
+                break
+            case .infoView :
+                // show some info
+                gestureDelegate?.showInfo(item)
+                break
+        }
     }
 }

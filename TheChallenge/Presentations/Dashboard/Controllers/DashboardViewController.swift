@@ -8,6 +8,11 @@
 import UIKit
 import Combine
 
+protocol GenericViewGestureHandler: AnyObject {
+    func showDetails (_: Content)
+    func showInfo(_: Content)
+}
+
 class DashboardViewController: UIViewController {
     
     lazy var tableView: UITableView = {
@@ -102,7 +107,7 @@ extension DashboardViewController: ViewConstraintAutoLayoutSetup {
             switch rowRessource.type {
                 case is MainCollectionTableViewCell.Type : do {
                     guard let cell = tableView.dequeueReusableCell(withIdentifier: MainCollectionTableViewCell.identifier) as? MainCollectionTableViewCell else { return UITableViewCell() }
-                    cell.setup(with: self.viewModel.structuredRowProvider[indexPath.section].content)
+                    cell.setup(with: self.viewModel.structuredRowProvider[indexPath.section].content, gestureDelegate: self)
                     return cell
                 }
                 default : do {
@@ -129,4 +134,16 @@ extension DashboardViewController: ViewConstraintAutoLayoutSetup {
     
     @objc
     func refreshData() { }
+}
+
+extension DashboardViewController: GenericViewGestureHandler {
+
+    func showDetails (_: Content) {
+        
+    }
+    
+    func showInfo(_: Content) {
+        
+    }
+    
 }
