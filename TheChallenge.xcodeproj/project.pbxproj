@@ -101,12 +101,10 @@
 		E9E0D564283780BD000DA6F6 /* TheChallenge */ = {
 			isa = PBXGroup;
 			children = (
-				E9E0D565283780BD000DA6F6 /* AppDelegate.swift */,
-				E9E0D567283780BD000DA6F6 /* SceneDelegate.swift */,
+				E9E0D59928378180000DA6F6 /* Ressources */,
+				E9E0D5982837815E000DA6F6 /* Application */,
 				E9E0D569283780BD000DA6F6 /* ViewController.swift */,
 				E9E0D56B283780BD000DA6F6 /* Main.storyboard */,
-				E9E0D571283780BF000DA6F6 /* Assets.xcassets */,
-				E9E0D573283780BF000DA6F6 /* LaunchScreen.storyboard */,
 				E9E0D576283780BF000DA6F6 /* Info.plist */,
 				E9E0D56E283780BD000DA6F6 /* TheChallenge.xcdatamodeld */,
 			);
@@ -128,6 +126,24 @@
 				E9E0D58B283780BF000DA6F6 /* TheChallengeUITestsLaunchTests.swift */,
 			);
 			path = TheChallengeUITests;
+			sourceTree = "<group>";
+		};
+		E9E0D5982837815E000DA6F6 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D565283780BD000DA6F6 /* AppDelegate.swift */,
+				E9E0D567283780BD000DA6F6 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		E9E0D59928378180000DA6F6 /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D571283780BF000DA6F6 /* Assets.xcassets */,
+				E9E0D573283780BF000DA6F6 /* LaunchScreen.storyboard */,
+			);
+			path = Ressources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
