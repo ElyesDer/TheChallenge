@@ -65,8 +65,11 @@ struct Stars: Codable {
 }
 
 
-extension Movie {
-    static var mock : [Movie] = [
+extension Movie : Mockable {
+    
+    typealias T = Movie
+    
+    static var mocks: [Movie] = [
         
         .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
         

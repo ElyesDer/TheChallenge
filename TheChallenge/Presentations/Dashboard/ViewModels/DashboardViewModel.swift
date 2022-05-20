@@ -6,74 +6,41 @@
 //
 
 import Foundation
-
-struct StructureCellModel {
-    var row: ContentRow
-    var content: [Content]
-}
+import Combine
 
 class DashboardViewModel {
-    @Published var structuredRowProvider = [StructureCellModel]()
+    
+    @Published
+    var structuredRowProvider = [StructureCellModel]()
+    
+    var serviceProvider: DataServiceProviderProtocol
+    
+    var cancellables = Set<AnyCancellable>()
+    
+    init(serviceProvider: DataServiceProviderProtocol = Requester()) {
+        self.serviceProvider = serviceProvider
+    }
     
     func load() {
-        structuredRowProvider = [
-            .init(row: .forYou, content: [
-                .init(isInOffer: true, subtitle: "subtitle", contentID: "contentID_11123",
-                      onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                     displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: [])
-            ]),
-            
-                .init(row: .contentRow, content: [
-                    .init(isInOffer: true, subtitle: "subtitle", contentID: "contentID_12342",
-                          onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                         displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
-                    
-                        .init(isInOffer: true, subtitle: "subtitle", contentID: "contentID_12334",
-                              onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                             displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
-                    
-                        .init(isInOffer: true, subtitle: "subtitle", contentID: "contefrntID_12434",
-                              onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                             displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
-                    
-                        .init(isInOffer: true, subtitle: "subtitle", contentID: "contentasID_12342",
-                              onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                             displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
-                        
-                            .init(isInOffer: true, subtitle: "subtitle", contentID: "concxcxtentID_12334",
-                                  onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                                 displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
-                        
-                            .init(isInOffer: true, subtitle: "subtitle", contentID: "condstentID_12434",
-                                  onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                                 displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
-                    
-                        .init(isInOffer: true, subtitle: "subtitle", contentID: "contassentID_12342",
-                              onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                             displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
-                        
-                            .init(isInOffer: true, subtitle: "subtitle", contentID: "contentqwID_12334",
-                                  onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                                 displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
-                        
-                            .init(isInOffer: true, subtitle: "subtitle", contentID: "contentID_12434",
-                                  onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                                 displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
-                    
-                        .init(isInOffer: true, subtitle: "subtitle", contentID: "contentID_12123342",
-                              onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                             displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
-                        
-                            .init(isInOffer: true, subtitle: "subtitle", contentID: "contentIDqwe_12334",
-                                  onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                                 displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
-                        
-                            .init(isInOffer: true, subtitle: "subtitle", contentID: "contewentID_12434",
-                                  onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                                 displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
-                    
-                    
-                ]),
-        ]
+        serviceProvider
+            .request(from: APIEndpoint(
+                method: .get,
+                endURL: .movies), of: ContentWrapper<[Content]>.self)
+            .map { content in
+                StructureCellModel(
+                    row: content.type,
+                    content: content.contents)
+            }
+            .sink { completion in
+                switch completion {
+                    case .finished : break
+                    case .failure(let error) :
+                        print(error)
+                }
+            } receiveValue: { structuredRow in
+                // use this because ContentWrapper<[Content]> is not an array
+                self.structuredRowProvider = [structuredRow]
+            }
+            .store(in: &cancellables)
     }
 }
