@@ -187,7 +187,6 @@
 		E9E0D5A62837868A000DA6F6 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				E9E0D5AB28378715000DA6F6 /* Models */,
 				E9E0D5AA28378702000DA6F6 /* Entities */,
 				E9E0D5A9283786F8000DA6F6 /* Views */,
 			);
@@ -209,13 +208,6 @@
 				E9E0D5AC2837872D000DA6F6 /* Movie.swift */,
 			);
 			path = Entities;
-			sourceTree = "<group>";
-		};
-		E9E0D5AB28378715000DA6F6 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		E9E0D5B0283788B9000DA6F6 /* Network */ = {
