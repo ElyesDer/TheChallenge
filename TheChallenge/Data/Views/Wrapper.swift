@@ -16,11 +16,11 @@ struct ContentWrapper<T: Decodable>: Decodable {
 }
 
 protocol Configuration {
-    var size : CGSize { get }
+    var size : CGSize? { get }
 }
 
 struct TableViewCellConfiguration: Configuration {
-    var size: CGSize
+    var size: CGSize?
 }
 
 struct RowRessource<T>: Identifiable {
@@ -38,7 +38,7 @@ enum ContentRow: String, CaseIterable, Decodable {
     func getRessource() -> RowRessource<Any> {
         switch self {
             case .contentRow:
-                return .init(id: "MainCollectionTableViewCell", class: MainCollectionTableViewCell.self, type: MainCollectionTableViewCell.self, configuration: TableViewCellConfiguration(size: .init(width: 160, height: 200)))
+                return .init(id: "MainCollectionTableViewCell", class: MainCollectionTableViewCell.self, type: MainCollectionTableViewCell.self, configuration: TableViewCellConfiguration(size: nil))
             case .forYou:
                 return .init(id: "MainCollectionTableViewCell", class: MainCollectionTableViewCell.self, type: MainCollectionTableViewCell.self, configuration: TableViewCellConfiguration(size: .init(width: 160, height: 200)))
         }

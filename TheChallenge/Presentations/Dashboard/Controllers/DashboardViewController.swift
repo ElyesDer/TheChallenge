@@ -64,10 +64,11 @@ class DashboardViewController: UIViewController {
 
 extension DashboardViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-            case 0 : return 200
-            default : return 500
+        let configuration = self.viewModel.structuredRowProvider[indexPath.section].row.getRessource().configuration
+        if let height = configuration.size?.height {
+            return height
         }
+        return UIScreen.main.bounds.height
     }
 }
 
