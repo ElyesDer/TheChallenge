@@ -25,6 +25,16 @@ struct Movie: Codable {
     let editorialTitle: String
 }
 
+extension Movie : Hashable {
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        lhs.contentID == rhs.contentID
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(contentID)
+    }
+}
+
 // MARK: - Formats
 struct Formats: Codable {
     let video, audio: [String]
@@ -52,4 +62,18 @@ struct Review: Codable {
 struct Stars: Codable {
     let type: String
     let value: Double
+}
+
+
+extension Movie {
+    static var mock : [Movie] = [
+        
+        .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
+        
+            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
+        
+            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
+        
+            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
+    ]
 }

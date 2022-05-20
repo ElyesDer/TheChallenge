@@ -26,6 +26,8 @@ class RequesterTests: XCTestCase {
     
     func test_request_get_movies() {
         let expectation = self.expectation(description: "Requesting data from canal server")
+        
+        var contentWrapperResponse: ContentWrapper<[Content]>?
         var data: [Content]?
         
         // with
@@ -45,6 +47,7 @@ class RequesterTests: XCTestCase {
                 case .finished : break
                 }
             } receiveValue: { responseData in
+                contentWrapperResponse = responseData
                 data = responseData.contents
                 expectation.fulfill()
             }
@@ -53,6 +56,7 @@ class RequesterTests: XCTestCase {
         waitForExpectations(timeout: 10, handler: nil)
         
         // check nullable
+        XCTAssertNotNil(contentWrapperResponse)
         XCTAssertNotNil(data)
         
     }

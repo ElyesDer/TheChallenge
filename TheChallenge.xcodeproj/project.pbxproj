@@ -23,6 +23,13 @@
 		E9E0D5B2283789C6000DA6F6 /* Requester.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5B1283789C6000DA6F6 /* Requester.swift */; };
 		E9E0D5B4283789F7000DA6F6 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5B3283789F7000DA6F6 /* APIService.swift */; };
 		E9E0D5B728378B13000DA6F6 /* RequesterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5B628378B13000DA6F6 /* RequesterTest.swift */; };
+		E9E0D5BB2837932C000DA6F6 /* UIView+Autolayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5BA2837932C000DA6F6 /* UIView+Autolayout.swift */; };
+		E9E0D5BE28379367000DA6F6 /* ViewConstraintAutolayoutSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5BD28379367000DA6F6 /* ViewConstraintAutolayoutSetup.swift */; };
+		E9E0D5C128379569000DA6F6 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5C028379569000DA6F6 /* DashboardViewModel.swift */; };
+		E9E0D5C428379650000DA6F6 /* DashboardTableViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5C328379650000DA6F6 /* DashboardTableViewDiffableDataSource.swift */; };
+		E9E0D5CC2837B923000DA6F6 /* UIViewComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5CB2837B923000DA6F6 /* UIViewComponents.swift */; };
+		E9E0D5CF2837BEE8000DA6F6 /* MainCollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5CE2837BEE8000DA6F6 /* MainCollectionTableViewCell.swift */; };
+		E9E0D5D12837C4C8000DA6F6 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D5D02837C4C8000DA6F6 /* MovieCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +69,13 @@
 		E9E0D5B1283789C6000DA6F6 /* Requester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requester.swift; sourceTree = "<group>"; };
 		E9E0D5B3283789F7000DA6F6 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		E9E0D5B628378B13000DA6F6 /* RequesterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequesterTest.swift; sourceTree = "<group>"; };
+		E9E0D5BA2837932C000DA6F6 /* UIView+Autolayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Autolayout.swift"; sourceTree = "<group>"; };
+		E9E0D5BD28379367000DA6F6 /* ViewConstraintAutolayoutSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConstraintAutolayoutSetup.swift; sourceTree = "<group>"; };
+		E9E0D5C028379569000DA6F6 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		E9E0D5C328379650000DA6F6 /* DashboardTableViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewDiffableDataSource.swift; sourceTree = "<group>"; };
+		E9E0D5CB2837B923000DA6F6 /* UIViewComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewComponents.swift; sourceTree = "<group>"; };
+		E9E0D5CE2837BEE8000DA6F6 /* MainCollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionTableViewCell.swift; sourceTree = "<group>"; };
+		E9E0D5D02837C4C8000DA6F6 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +177,7 @@
 		E9E0D59E28378457000DA6F6 /* Presentations */ = {
 			isa = PBXGroup;
 			children = (
+				E9E0D5C92837B901000DA6F6 /* Shared */,
 				E9E0D59F2837845B000DA6F6 /* Dashboard */,
 			);
 			path = Presentations;
@@ -171,6 +186,9 @@
 		E9E0D59F2837845B000DA6F6 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				E9E0D5C528379C16000DA6F6 /* Protocols */,
+				E9E0D5C22837963E000DA6F6 /* Components */,
+				E9E0D5BF28379558000DA6F6 /* ViewModels */,
 				E9E0D5A028378460000DA6F6 /* Controllers */,
 			);
 			path = Dashboard;
@@ -225,6 +243,81 @@
 				E9E0D5B628378B13000DA6F6 /* RequesterTest.swift */,
 			);
 			path = NetworkLayer;
+			sourceTree = "<group>";
+		};
+		E9E0D5B828379316000DA6F6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D5BC28379350000DA6F6 /* Protocols */,
+				E9E0D5B92837931E000DA6F6 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		E9E0D5B92837931E000DA6F6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D5BA2837932C000DA6F6 /* UIView+Autolayout.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E9E0D5BC28379350000DA6F6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D5BD28379367000DA6F6 /* ViewConstraintAutolayoutSetup.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		E9E0D5BF28379558000DA6F6 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D5C028379569000DA6F6 /* DashboardViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E9E0D5C22837963E000DA6F6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D5C62837A519000DA6F6 /* Cells */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E9E0D5C528379C16000DA6F6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D5C328379650000DA6F6 /* DashboardTableViewDiffableDataSource.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		E9E0D5C62837A519000DA6F6 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D5CE2837BEE8000DA6F6 /* MainCollectionTableViewCell.swift */,
+				E9E0D5D02837C4C8000DA6F6 /* MovieCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		E9E0D5C92837B901000DA6F6 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D5CA2837B908000DA6F6 /* Generics */,
+				E9E0D5B828379316000DA6F6 /* Utils */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		E9E0D5CA2837B908000DA6F6 /* Generics */ = {
+			isa = PBXGroup;
+			children = (
+				E9E0D5CB2837B923000DA6F6 /* UIViewComponents.swift */,
+			);
+			path = Generics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,13 +477,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9E0D5D12837C4C8000DA6F6 /* MovieCollectionViewCell.swift in Sources */,
+				E9E0D5C428379650000DA6F6 /* DashboardTableViewDiffableDataSource.swift in Sources */,
 				E9E0D570283780BD000DA6F6 /* TheChallenge.xcdatamodeld in Sources */,
 				E9E0D566283780BD000DA6F6 /* AppDelegate.swift in Sources */,
 				E9E0D5B2283789C6000DA6F6 /* Requester.swift in Sources */,
+				E9E0D5C128379569000DA6F6 /* DashboardViewModel.swift in Sources */,
+				E9E0D5CF2837BEE8000DA6F6 /* MainCollectionTableViewCell.swift in Sources */,
 				E9E0D5AF28378773000DA6F6 /* ContentRow.swift in Sources */,
+				E9E0D5BE28379367000DA6F6 /* ViewConstraintAutolayoutSetup.swift in Sources */,
+				E9E0D5CC2837B923000DA6F6 /* UIViewComponents.swift in Sources */,
 				E9E0D5AD2837872D000DA6F6 /* Movie.swift in Sources */,
 				E9E0D5A8283786F0000DA6F6 /* Wrapper.swift in Sources */,
 				E9E0D568283780BD000DA6F6 /* SceneDelegate.swift in Sources */,
+				E9E0D5BB2837932C000DA6F6 /* UIView+Autolayout.swift in Sources */,
 				E9E0D5B4283789F7000DA6F6 /* APIService.swift in Sources */,
 				E9E0D5A22837846D000DA6F6 /* DashboardViewController.swift in Sources */,
 			);

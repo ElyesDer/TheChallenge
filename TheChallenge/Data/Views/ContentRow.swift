@@ -8,7 +8,9 @@
 import Foundation
 
 // MARK: - Content
-struct Content: Decodable {
+struct Content: Identifiable, Decodable {
+    var id: UUID = { UUID() }()
+    
     let isInOffer: Bool
     let subtitle, contentID: String
     let onClick: OnClick
@@ -22,6 +24,17 @@ struct Content: Decodable {
         case urlImage = "URLImage"
         case urlLogoChannel = "URLLogoChannel"
         case type, parentalRatings
+    }
+}
+
+extension Content: Hashable {
+    
+    static func == (lhs: Content, rhs: Content) -> Bool {
+        lhs.contentID == rhs.contentID
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(contentID)
     }
 }
 
