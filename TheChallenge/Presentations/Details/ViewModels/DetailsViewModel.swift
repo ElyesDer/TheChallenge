@@ -10,6 +10,13 @@ import Combine
 
 class DetailsViewModel {
     
+    enum DetailsViewModelLoadingState {
+        case loading
+        case failed(String)
+        case loaded
+        case idle
+    }
+    
     let path: String
     
     @Published
@@ -29,6 +36,9 @@ class DetailsViewModel {
     
     var cancellables = Set<AnyCancellable>()
     
+    @Published
+    var loadingState: DetailsViewModelLoadingState = .idle
+    
     init(from path: String, using serviceProvider: DataServiceProviderProtocol = Requester()) {
         // load content form path
         self.path = path
@@ -37,16 +47,20 @@ class DetailsViewModel {
     
     func viewDidLoad() {
         // load url content
+        loadingState = .loading
         serviceProvider
             .request(from: APIEndpoint(
                 method: .get,
                 endURL: .custom(self.path)), of: Movie.self)
             .sink { completion in
                 switch completion {
-                    case .finished : break
+                    case .finished :
+                        self.loadingState = .loaded
+                        break
                     case .failure(let error) :
-                        print(error)
+                        self.loadingState = .failed(error.localizedDescription)
                 }
+                
             } receiveValue: { movie in
                 self.imageHeader = movie.imageURL
                 self.imagePreview = movie.channelLogoURL
@@ -60,6 +74,5 @@ class DetailsViewModel {
                 self.movie = movie
             }
             .store(in: &cancellables)
-
     }
 }

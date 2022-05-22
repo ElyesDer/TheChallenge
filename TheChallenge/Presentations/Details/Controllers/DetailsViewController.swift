@@ -125,6 +125,23 @@ class DetailsViewController: UIViewController {
                 self?.setUpViews()
             })
             .store(in: &cancellables)
+        
+        viewModel
+            .$loadingState
+            .receive(on: RunLoop.main)
+            .sink { value in
+                switch value {
+                    case .failed(let errorDescription):
+                        let alert = UIAlertController(title: "Error loading content", message: "Content load content from server with error \(errorDescription)", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { _ in
+                            self.navigationController?.popViewController(animated: true)
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                    default: break
+                }
+            }
+            .store(in: &cancellables)
+        
     }
     
 }

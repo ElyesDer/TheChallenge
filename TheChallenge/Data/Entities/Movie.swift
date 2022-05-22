@@ -71,12 +71,15 @@ extension Movie : Mockable {
     
     static var mocks: [Movie] = [
         
-        .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
+        .init(subtitle: "subtitle", sharingURL: "sharingURL",
+              formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title",
+              channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [],
+              productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
         
-            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
-        
-            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
-        
-            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
+//            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
+//        
+//            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
+//        
+//            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
     ]
 }
