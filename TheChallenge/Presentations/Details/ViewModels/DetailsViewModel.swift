@@ -20,17 +20,17 @@ class DetailsViewModel {
     let path: String
     
     @Published
-    var movie: Movie? = nil
+    var movie: Movie?
     
-    var imageHeader: String? = nil
-    var imagePreview: String? = nil
-    var title: String? = nil
-    var description: String? = nil
-    var rating: Double? = nil
-    var cast: String? = nil
-    var year: String? = nil
-    var length: String? = nil
-    var subdetails: String? = nil
+    var imageHeader: String?
+    var imagePreview: String?
+    var title: String?
+    var description: String?
+    var rating: Double?
+    var cast: String?
+    var year: String?
+    var length: String?
+    var subdetails: String?
     
     var serviceProvider : DataServiceProviderProtocol!
     

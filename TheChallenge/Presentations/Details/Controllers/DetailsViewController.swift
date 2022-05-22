@@ -132,7 +132,7 @@ class DetailsViewController: UIViewController {
             .sink { value in
                 switch value {
                     case .failed(let errorDescription):
-                        let alert = UIAlertController(title: "Error loading content", message: "Content load content from server with error \(errorDescription)", preferredStyle: UIAlertController.Style.alert)
+                        let alert = UIAlertController(title: "Error loading content", message: "Content loaded from server with error \(errorDescription)", preferredStyle: UIAlertController.Style.alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .destructive, handler: { _ in
                             self.navigationController?.popViewController(animated: true)
                         }))
