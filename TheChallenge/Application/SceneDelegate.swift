@@ -21,7 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let firstViewController = Inject.ViewControllerHost(DashboardViewController())
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = firstViewController
+        let navController = UINavigationController()
+        
+        navController.viewControllers = [firstViewController]
+        window.rootViewController = navController
         self.window = window
         window.makeKeyAndVisible()
     }

@@ -141,7 +141,7 @@ extension DashboardViewController: GenericViewGestureHandler {
     func showDetails (content: Content) {
         let detailsVC = DetailsViewController()
         detailsVC.viewModel = .init(from: content.onClick.urlPage)
-        self.present(detailsVC, animated: true)
+        self.navigationController?.pushViewController(detailsVC, animated: true)
     }
     
     func showInfo(content: Content) {
