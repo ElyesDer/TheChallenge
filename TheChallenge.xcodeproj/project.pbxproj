@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E9B2CC8F2838614700910781 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B2CC8E2838614700910781 /* DetailsViewController.swift */; };
+		E9B2CC912838624400910781 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B2CC902838624400910781 /* DetailsViewModel.swift */; };
 		E9E0D566283780BD000DA6F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D565283780BD000DA6F6 /* AppDelegate.swift */; };
 		E9E0D568283780BD000DA6F6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D567283780BD000DA6F6 /* SceneDelegate.swift */; };
 		E9E0D570283780BD000DA6F6 /* TheChallenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9E0D56E283780BD000DA6F6 /* TheChallenge.xcdatamodeld */; };
@@ -52,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E9B2CC8E2838614700910781 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		E9B2CC902838624400910781 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		E9E0D562283780BD000DA6F6 /* TheChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9E0D565283780BD000DA6F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9E0D567283780BD000DA6F6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +112,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E9B2CC8A2838611A00910781 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				E9B2CC8D2838613800910781 /* Components */,
+				E9B2CC8C2838612D00910781 /* ViewModels */,
+				E9B2CC8B2838612600910781 /* Controllers */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		E9B2CC8B2838612600910781 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E9B2CC8E2838614700910781 /* DetailsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E9B2CC8C2838612D00910781 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E9B2CC902838624400910781 /* DetailsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E9B2CC8D2838613800910781 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		E9E0D559283780BD000DA6F6 = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				E9E0D5C92837B901000DA6F6 /* Shared */,
+				E9B2CC8A2838611A00910781 /* Details */,
 				E9E0D59F2837845B000DA6F6 /* Dashboard */,
 			);
 			path = Presentations;
@@ -514,12 +552,14 @@
 				E9E0D5B2283789C6000DA6F6 /* Requester.swift in Sources */,
 				E9E0D5C128379569000DA6F6 /* DashboardViewModel.swift in Sources */,
 				E9E0D5CF2837BEE8000DA6F6 /* MainCollectionTableViewCell.swift in Sources */,
+				E9B2CC912838624400910781 /* DetailsViewModel.swift in Sources */,
 				E9E0D5D82837F768000DA6F6 /* StructureCellModel.swift in Sources */,
 				E9E0D5AF28378773000DA6F6 /* ContentRow.swift in Sources */,
 				E9E0D5D52837F6FF000DA6F6 /* Mockable.swift in Sources */,
 				E9E0D5BE28379367000DA6F6 /* ViewConstraintAutolayoutSetup.swift in Sources */,
 				E9E0D5CC2837B923000DA6F6 /* UIViewComponents.swift in Sources */,
 				E9E0D5AD2837872D000DA6F6 /* Movie.swift in Sources */,
+				E9B2CC8F2838614700910781 /* DetailsViewController.swift in Sources */,
 				E9E0D5A8283786F0000DA6F6 /* Wrapper.swift in Sources */,
 				E9E0D568283780BD000DA6F6 /* SceneDelegate.swift in Sources */,
 				E9E0D5BB2837932C000DA6F6 /* UIView+Autolayout.swift in Sources */,

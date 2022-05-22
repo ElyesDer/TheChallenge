@@ -106,11 +106,11 @@ extension MainCollectionTableViewCell: UICollectionViewDelegate {
         switch item.onClick.displayTemplate {
             case .detailPage :
                 // go details
-                gestureDelegate?.showDetails(item)
+                gestureDelegate?.showDetails(content: item)
                 break
             case .infoView :
                 // show some info
-                gestureDelegate?.showInfo(item)
+                gestureDelegate?.showInfo(content: item)
                 break
         }
     }

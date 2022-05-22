@@ -9,8 +9,8 @@ import UIKit
 import Combine
 
 protocol GenericViewGestureHandler: AnyObject {
-    func showDetails (_: Content)
-    func showInfo(_: Content)
+    func showDetails (content: Content)
+    func showInfo(content: Content)
 }
 
 class DashboardViewController: UIViewController {
@@ -138,11 +138,13 @@ extension DashboardViewController: ViewConstraintAutoLayoutSetup {
 
 extension DashboardViewController: GenericViewGestureHandler {
 
-    func showDetails (_: Content) {
-        
+    func showDetails (content: Content) {
+        let detailsVC = DetailsViewController()
+        detailsVC.viewModel = .init(from: content.onClick.urlPage)
+        self.present(detailsVC, animated: true)
     }
     
-    func showInfo(_: Content) {
+    func showInfo(content: Content) {
         
     }
     
