@@ -153,19 +153,20 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         
         containerView.addSubview(imageHeader)
         scrollView.addSubview(containerView)
-        containerView.addSubview(imagePreview)
         
         containerView.addSubview(imageHeader)
-        detailsView.addSubview(imagePreview)
         containerView.addSubview(detailsView)
 
         containerView.addSubview(titleLabel)
         containerView.addSubview(subDetailsLabel)
+        
         containerView.addSubview(castLabelSection)
         containerView.addSubview(castLabel)
         containerView.addSubview(descriptionLabelSection)
         containerView.addSubview(descriptionLabel)
         
+        let parentalRatingView = buildParentalRatingView()
+        containerView.addSubview(parentalRatingView)
     }
     
     func setUpConstraints() {
@@ -199,20 +200,26 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         ])
 
         // setup Subviews
-        titleLabel.anchor(top: imagePreview.topAnchor,
-                          leading: imagePreview.trailingAnchor,
-                          bottom: nil,
-                          trailing: containerView.trailingAnchor,
-                          padding: .init(top: 4, left: 16, bottom: 8, right: 4)
+        NSLayoutConstraint.activate([
+            titleLabel.centerXAnchor.constraint(equalTo: imageHeader.centerXAnchor),
+            subDetailsLabel.centerXAnchor.constraint(equalTo: imageHeader.centerXAnchor),
+        ])
+        
+        
+        titleLabel.anchor(top: nil,
+                          leading: nil,
+                          bottom: subDetailsLabel.topAnchor,
+                          trailing: nil,
+                          padding: .init(top: 4, left: 0, bottom: 4, right: 0)
         )
         
-        subDetailsLabel.anchor(top: titleLabel.bottomAnchor,
-                               leading: imagePreview.trailingAnchor,
-                               bottom: imagePreview.bottomAnchor,
-                               trailing: containerView.trailingAnchor,
-                               padding: .init(top: 8, left: 16, bottom: 8, right: 8))
+        subDetailsLabel.anchor(top: nil,
+                               leading: nil,
+                               bottom: imageHeader.bottomAnchor,
+                               trailing: nil,
+                               padding: .init(top: 4, left: 0, bottom: 42, right: 0))
         
-        castLabelSection.anchor(top: imagePreview.bottomAnchor,
+        castLabelSection.anchor(top: imageHeader.bottomAnchor,
                                 leading: containerView.leadingAnchor,
                                 bottom: nil,
                                 trailing: containerView.trailingAnchor,
@@ -240,24 +247,12 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
                            leading: containerView.leadingAnchor,
                            bottom: nil,
                            trailing: containerView.trailingAnchor,
-                           padding: .init(top: 200, left: 0, bottom: 0, right: 0)
+                           padding: .init(top: 250, left: 0, bottom: 0, right: 0)
         )
-
-        imagePreview.anchor(top: detailsView.topAnchor, leading: scrollView.leadingAnchor, bottom: nil, trailing: nil,
-                            padding: .init(top: -50, left: 16, bottom: 0, right: 0))
-
-        NSLayoutConstraint.activate([
-            imagePreview.widthAnchor.constraint(equalToConstant: 120),
-            imagePreview.heightAnchor.constraint(equalToConstant: 160)
-        ])
         
     }
     
     func setUpViews() {
-        
-        // setup image loading
-        imagePreview.image = .init(named: "placeholder")
-        
         // setup image loading
         imageHeader.image = .init(named: "placeholder")
         
@@ -270,8 +265,21 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         castLabel.text = viewModel.cast
         descriptionLabelSection.text = "Description"
         descriptionLabel.text = viewModel.description
+    }
+    
+    func buildParentalRatingView() -> UIView {
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .horizontal
+        stackView.spacing = 2
         
+        viewModel.movie?.parentalRatings.forEach({ parentalRating in
+            let label = UILabel(frame: .zero)
+            label.text = parentalRating.authority + " - " + parentalRating.value
+            label.layer.borderWidth = 1.5
+            stackView.addArrangedSubview(stackView)
+        })
         
+        return stackView
     }
     
 }
