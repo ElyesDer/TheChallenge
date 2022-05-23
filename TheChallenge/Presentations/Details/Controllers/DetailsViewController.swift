@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import SwiftUI
 
 class DetailsViewController: UIViewController {
     
@@ -72,12 +73,10 @@ class DetailsViewController: UIViewController {
         return label
     }()
     
-    lazy var castLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.sizeToFit()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    lazy var castContainer: UIView = {
+        let uiView = UIView()
+        uiView.translatesAutoresizingMaskIntoConstraints = false
+        return uiView
     }()
     
     lazy var descriptionLabelSection: UILabel = {
@@ -97,6 +96,21 @@ class DetailsViewController: UIViewController {
         scrollView.backgroundColor = .systemBackground
         return scrollView
     }()
+    
+    lazy var subInfoStack: UIStackView = {
+        let stackView: UIStackView = .init(frame: .zero)
+        stackView.spacing = 2
+        stackView.alignment = .center
+        stackView.axis = .horizontal
+        stackView.distribution = .equalCentering
+        
+        return stackView
+    }()
+    
+    
+    var parentalView: UIView?
+    var formatView: UIView?
+    var castView: UIView?
     
     var viewModel: DetailsViewModel!
 
@@ -161,12 +175,13 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         containerView.addSubview(subDetailsLabel)
         
         containerView.addSubview(castLabelSection)
-        containerView.addSubview(castLabel)
+//        containerView.addSubview(castLabel)
         containerView.addSubview(descriptionLabelSection)
         containerView.addSubview(descriptionLabel)
         
-        let parentalRatingView = buildParentalRatingView()
-        containerView.addSubview(parentalRatingView)
+        containerView.addSubview(castContainer)
+        
+        imageHeader.addSubview(subInfoStack)
     }
     
     func setUpConstraints() {
@@ -225,13 +240,13 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
                                 trailing: containerView.trailingAnchor,
                                 padding: .init(top: 8, left: 16, bottom: 8, right: 16))
         
-        castLabel.anchor(top: castLabelSection.bottomAnchor,
+        castContainer.anchor(top: castLabelSection.bottomAnchor,
                                 leading: containerView.leadingAnchor,
                                 bottom: nil,
                                 trailing: containerView.trailingAnchor,
                                 padding: .init(top: 8, left: 16, bottom: 8, right: 16))
         
-        descriptionLabelSection.anchor(top: castLabel.bottomAnchor,
+        descriptionLabelSection.anchor(top: castContainer.bottomAnchor,
                                 leading: containerView.leadingAnchor,
                                 bottom: nil,
                                 trailing: containerView.trailingAnchor,
@@ -250,6 +265,21 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
                            padding: .init(top: 250, left: 0, bottom: 0, right: 0)
         )
         
+        subInfoStack.anchor(top: nil,
+                            leading: nil,
+                            bottom: imageHeader.bottomAnchor,
+                            trailing: nil,
+                            padding: .init(top: 0, left: 0, bottom: 8, right: 0)
+        )
+        
+        // setup height constraint
+        NSLayoutConstraint.activate([
+            castContainer.heightAnchor.constraint(equalToConstant: 450),
+            subInfoStack.heightAnchor.constraint(equalToConstant: 30),
+            
+            subInfoStack.centerXAnchor.constraint(equalTo: imageHeader.centerXAnchor),
+        ])
+        
     }
     
     func setUpViews() {
@@ -262,12 +292,58 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         subDetailsLabel.attributedText = NSAttributedString(attributedString: .init(string: viewModel.subdetails ?? ""))
         
         castLabelSection.text = "Cast"
-        castLabel.text = viewModel.cast
+//        castLabel.text = viewModel.cast
         descriptionLabelSection.text = "Description"
         descriptionLabel.text = viewModel.description
+        
+        if let personnalities = viewModel.movie?.personnalities {
+            castView = buildCastView(with: personnalities).view
+            if let castView = castView {
+//                castView.debugView()
+                castContainer.addSubview(castView)
+                // setup constraint
+                castView.fillSuperview()
+//                castView.anchor(top: castLabelSection.bottomAnchor,
+//                                 leading: containerView.leadingAnchor,
+//                                 bottom: nil,
+//                                 trailing: containerView.trailingAnchor,
+//                                 padding: .init(top: 8, left: 16, bottom: 8, right: 16))
+            }
+        }
+        
+        // setup subInfoStack
+        
+        parentalView = buildParentalRatingView()
+        if let parentalView = parentalView {
+            containerView.addSubview(parentalView)
+            
+            parentalView.anchor(top: titleLabel.topAnchor,
+                                leading: titleLabel.trailingAnchor,
+                                bottom: titleLabel.bottomAnchor, trailing: nil,
+                                padding: .init(top: 0, left: 12, bottom: 0, right: 0))
+        }
+        
+        formatView = buildFormatView()
+        if let formatView = formatView {
+            subInfoStack.addArrangedSubview(formatView)
+        }
+        
     }
     
-    func buildParentalRatingView() -> UIView {
+    func buildFormatView() -> UIView? {
+        guard let format = self.viewModel.movie?.formats else { return nil }
+        let formatView = FormatsView()
+        formatView.setup(with: format)
+        return formatView
+    }
+    
+    func buildCastView(with personnalities: [Personnality]) -> UIHostingController<CastView> {
+        let castView = CastView(personnalities: personnalities)
+        let castHostView = UIHostingController(rootView: castView)
+        return castHostView
+    }
+    
+    func buildParentalRatingView() -> UIStackView {
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .horizontal
         stackView.spacing = 2
@@ -276,7 +352,7 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
             let label = UILabel(frame: .zero)
             label.text = parentalRating.authority + " - " + parentalRating.value
             label.layer.borderWidth = 1.5
-            stackView.addArrangedSubview(stackView)
+            stackView.addArrangedSubview(label)
         })
         
         return stackView

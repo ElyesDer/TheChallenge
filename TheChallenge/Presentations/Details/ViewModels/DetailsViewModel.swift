@@ -65,7 +65,7 @@ class DetailsViewModel {
                 self.imageHeader = movie.imageURL
                 self.imagePreview = movie.channelLogoURL
                 self.title = movie.title
-                self.subdetails = movie.subtitle
+                self.subdetails = movie.editorialTitle
                 self.description = movie.summary
                 self.rating = movie.reviews.map { $0.stars.value }.first ?? 0.0
                 self.year = movie.productionYear
