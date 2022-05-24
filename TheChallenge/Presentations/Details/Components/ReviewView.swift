@@ -65,9 +65,9 @@ struct ReviewView: View {
                                 Spacer()
                             }
                             
-                            //                            buildStarsView(rating: item.stars.value)
+                            buildStarsView(rating: item.stars.value)
                             
-                            Text(item.review ?? "No review")
+                            Text(item.review ?? "No comment")
                                 .minimumScaleFactor(0.5)
                                 .lineLimit(5)
                             

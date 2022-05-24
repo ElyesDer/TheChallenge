@@ -23,6 +23,13 @@ class DashboardViewController: UIViewController {
         return tableView
     }()
     
+    lazy var headerView: HeaderView = {
+        let headerView = HeaderView()
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return headerView
+    }()
+    
     private lazy var refreshControl = {
         return UIRefreshControl()
     }()
@@ -80,10 +87,24 @@ extension DashboardViewController: UITableViewDelegate {
 extension DashboardViewController: ViewConstraintAutoLayoutSetup {
     func addSubViewsComponents() {
         view.addSubview(tableView)
+        view.addSubview(headerView)
     }
     
     internal func setUpConstraints() {
-        tableView.fillSuperview()
+        
+        headerView.anchor(top: view.topAnchor,
+                          leading: view.leadingAnchor,
+                          bottom: nil,
+                          trailing: view.trailingAnchor,
+                          padding: .init(top: 0, left: 0, bottom: 0, right: 0))
+        
+        tableView.anchor(top: headerView.bottomAnchor,
+                         leading: view.safeAreaLayoutGuide.leadingAnchor,
+                         bottom: view.bottomAnchor,
+                         trailing: view.safeAreaLayoutGuide.trailingAnchor)
+        
+        headerView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        
     }
     
     internal func setUpViews() {
