@@ -26,8 +26,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
         addSubViewsComponents()
         setUpConstraints()
         setUpViews()
-        
-        debugView()
     }
     
     required init?(coder: NSCoder) {

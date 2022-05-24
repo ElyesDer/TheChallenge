@@ -107,6 +107,14 @@ class DetailsViewController: UIViewController {
         return stackView
     }()
     
+    lazy var trailerButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.backgroundColor = .blue
+        button.setTitle("Play trailer", for: .normal)
+        
+        return button
+    }()
+    
     var parentalView: UIView?
     var formatView: UIView?
     var castView: UIView?
@@ -334,6 +342,26 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
             
         }
         
+        // Setup player
+        if self.viewModel.movie?.trailerURL != nil {
+            // setup gesture
+            trailerButton.addTarget(self, action: #selector(launchTrailer), for: .touchUpInside)
+            
+            // add button to the hierachy
+            imageHeader.addSubview(trailerButton)
+            
+            // setup constraint
+            trailerButton.anchor(top: nil, leading: imageHeader.leadingAnchor, bottom: imageHeader.bottomAnchor, trailing: imageHeader.trailingAnchor)
+            
+            NSLayoutConstraint.activate([
+                trailerButton.heightAnchor.constraint(equalToConstant: 50)
+            ])
+        }
+    }
+    
+    @objc
+    func launchTrailer() {
+        // use this self.viewModel.movie?.trailerURL
     }
     
     func buildReviewView() -> UIHostingController<ReviewView>? {
