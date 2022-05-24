@@ -8,6 +8,8 @@
 import UIKit
 import Combine
 import SwiftUI
+import AVFoundation
+import AVKit
 
 class DetailsViewController: UIViewController {
     
@@ -362,7 +364,17 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
     @objc
     func launchTrailer() {
         // use this self.viewModel.movie?.trailerURL
-        
+        if let trailerURL = self.viewModel.movie?.trailerURL {
+            
+            let videoURL = URL(string: trailerURL)
+            let player = AVPlayer(url: videoURL!)
+            
+            let playerViewController = AVPlayerViewController()
+            playerViewController.player = player
+            self.present(playerViewController, animated: true) {
+                playerViewController.player!.play()
+            }
+        }
     }
     
     func buildReviewView() -> UIHostingController<ReviewView>? {
