@@ -106,6 +106,22 @@ class DetailsViewController: UIViewController {
         return button
     }()
     
+    var descriptionConstraint : NSLayoutConstraint!
+    
+    var dynamicView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    var dynamicButtonView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
     var parentalView: UIView?
     var formatView: UIView?
     var castView: UIView?
@@ -157,21 +173,34 @@ class DetailsViewController: UIViewController {
         
     }
     
-    var descriptionConstraint : NSLayoutConstraint!
+    @objc
+    func launchTrailer() {
+        // use this self.viewModel.movie?.trailerURL
+        if let trailerURL = self.viewModel.movie?.trailerURL {
+            
+            let videoURL = URL(string: trailerURL)
+            let player = AVPlayer(url: videoURL!)
+            
+            let playerViewController = AVPlayerViewController()
+            playerViewController.player = player
+            self.present(playerViewController, animated: true) {
+                playerViewController.player!.play()
+            }
+        }
+    }
     
-    var dynamicView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
+    @objc
+    func didPressShareButton() {
+        var shareItems: [Any] = ["Check out this one, Looks interesting for you"]
+        if let shareUrl = self.viewModel.movie?.sharingURL, let url = URL(string: shareUrl) {
+            shareItems.append(url)
+        } else if let trailerURL = self.viewModel.movie?.trailerURL, let url = URL(string: trailerURL) {
+            shareItems.append(url)
+        }
         
-        return view
-    }()
-    
-    var dynamicButtonView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
+        let shareController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
+        present(shareController, animated: true)
+    }
 }
 
 extension DetailsViewController: ViewConstraintAutoLayoutSetup {
@@ -359,22 +388,10 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
                 trailerButton.heightAnchor.constraint(equalToConstant: 50),
             ])
         }
-    }
-    
-    @objc
-    func launchTrailer() {
-        // use this self.viewModel.movie?.trailerURL
-        if let trailerURL = self.viewModel.movie?.trailerURL {
-            
-            let videoURL = URL(string: trailerURL)
-            let player = AVPlayer(url: videoURL!)
-            
-            let playerViewController = AVPlayerViewController()
-            playerViewController.player = player
-            self.present(playerViewController, animated: true) {
-                playerViewController.player!.play()
-            }
-        }
+        
+        // Setup share button
+        let rightButton: UIBarButtonItem = UIBarButtonItem(image: .init(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(didPressShareButton))
+        self.navigationItem.rightBarButtonItem = rightButton
     }
     
     func buildReviewView() -> UIHostingController<ReviewView>? {
