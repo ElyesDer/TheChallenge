@@ -54,7 +54,6 @@ struct ReviewView: View {
         VStack(alignment: .leading) {
             Text("Review Section")
                 .bold()
-                .padding(.leading)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
@@ -74,7 +73,7 @@ struct ReviewView: View {
                             
                             Spacer()
                         }
-                        .frame(width: 250, height: 150, alignment: .center)
+                        .frame(width: 200, height: 100, alignment: .center)
                         .padding(10)
                         .background(Color.gray)
                         .cornerRadius(15)
@@ -84,7 +83,6 @@ struct ReviewView: View {
                 .padding(.leading)
             }
         }
-        .background(Color.red)
     }
 }
 

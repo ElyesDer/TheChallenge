@@ -54,7 +54,7 @@ struct Personnality: Codable, Identifiable {
 
 // MARK: - Review
 struct Review: Codable {
-    var id = UUID()
+    var id: UUID? = UUID()
     let name: String
     let stars: Stars
     let review: String?

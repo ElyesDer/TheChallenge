@@ -18,16 +18,16 @@ class FormatsView: UIView {
         return stackView
     }()
     
-    var borederedLabel: UILabel {
-        let label: UILabel = .init(frame: .zero)
+    var borederedLabel: PaddingLabel {
+        let label: PaddingLabel = .init(withInsets: 3, 3, 3, 3)
         label.layer.borderWidth = 1.5
         label.layer.borderColor = UIColor.darkGray.cgColor
         label.textAlignment = .center
         return label
     }
     
-    var normaleLabel: UILabel {
-        let label: UILabel = .init(frame: .zero)
+    var normaleLabel: PaddingLabel {
+        let label: PaddingLabel = .init(withInsets: 3, 3, 3, 3)
         return label
     }
 
@@ -37,7 +37,6 @@ class FormatsView: UIView {
         super.init(frame: frame)
         addSubViewsComponents()
         setUpConstraints()
-//        setUpViews()
     }
     
     required init?(coder: NSCoder) {

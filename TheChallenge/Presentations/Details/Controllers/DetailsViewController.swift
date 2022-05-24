@@ -24,18 +24,6 @@ class DetailsViewController: UIViewController {
         return uiView
     }()
     
-    lazy var detailsView: UIView = {
-        let uiView = UIView()
-        uiView.translatesAutoresizingMaskIntoConstraints = false
-        return uiView
-    }()
-    
-    lazy var imagePreview: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -111,7 +99,8 @@ class DetailsViewController: UIViewController {
         let button = UIButton(frame: .zero)
         button.backgroundColor = .blue
         button.setTitle("Play trailer", for: .normal)
-        
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
         return button
     }()
     
@@ -166,6 +155,21 @@ class DetailsViewController: UIViewController {
         
     }
     
+    var descriptionConstraint : NSLayoutConstraint!
+    
+    var dynamicView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    var dynamicButtonView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
 }
 
 extension DetailsViewController: ViewConstraintAutoLayoutSetup {
@@ -176,12 +180,9 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         containerView.addSubview(imageHeader)
         scrollView.addSubview(containerView)
         
-        containerView.addSubview(imageHeader)
-        containerView.addSubview(detailsView)
-        
         containerView.addSubview(titleLabel)
         containerView.addSubview(subDetailsLabel)
-        
+        containerView.addSubview(dynamicButtonView)
         containerView.addSubview(castLabelSection)
         //        containerView.addSubview(castLabel)
         containerView.addSubview(descriptionLabelSection)
@@ -190,33 +191,33 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         containerView.addSubview(castContainer)
         
         imageHeader.addSubview(subInfoStack)
+        
+        containerView.addSubview(dynamicView)
     }
     
     func setUpConstraints() {
         
         // Setup scrollView Constraint
-        scrollView.anchor(top: view.topAnchor,
-                          leading: view.leadingAnchor,
-                          bottom: view.bottomAnchor,
-                          trailing: view.trailingAnchor)
+        scrollView.fillSuperview()
         
         //         setup contentView
         containerView.anchor(top: scrollView.topAnchor,
                              leading: scrollView.leadingAnchor,
                              bottom: scrollView.bottomAnchor,
-                             trailing: scrollView.trailingAnchor)
+                             trailing: scrollView.trailingAnchor,
+                             padding: .init(top: 300, left: 0, bottom: 0, right: 0))
         
         NSLayoutConstraint.activate([
             containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
         
         // setup Flexible Image header
-        imageHeader.anchor(top: view.topAnchor,
+        imageHeader.anchor(top: nil,
                            leading: containerView.leadingAnchor,
-                           bottom: detailsView.topAnchor,
+                           bottom: containerView.topAnchor,
                            trailing: containerView.trailingAnchor)
         
-        let headerConstraint = imageHeader.topAnchor.constraint(equalTo: scrollView.topAnchor)
+        let headerConstraint = imageHeader.topAnchor.constraint(equalTo: view.topAnchor)
         headerConstraint.priority = UILayoutPriority(999)
         NSLayoutConstraint.activate([
             headerConstraint
@@ -241,11 +242,17 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
                                trailing: nil,
                                padding: .init(top: 4, left: 0, bottom: 42, right: 0))
         
-        castLabelSection.anchor(top: imageHeader.bottomAnchor,
+        dynamicButtonView.anchor(top: imageHeader.bottomAnchor,
+                                 leading: containerView.leadingAnchor,
+                                 bottom: castLabelSection.topAnchor,
+                                 trailing: containerView.trailingAnchor,
+                                 padding: .init(top: 0, left: 16, bottom: 0, right: 16))
+        
+        castLabelSection.anchor(top: dynamicButtonView.bottomAnchor,
                                 leading: containerView.leadingAnchor,
                                 bottom: nil,
                                 trailing: containerView.trailingAnchor,
-                                padding: .init(top: 8, left: 16, bottom: 8, right: 16))
+                                padding: .init(top: 0, left: 16, bottom: 8, right: 16))
         
         castContainer.anchor(top: castLabelSection.bottomAnchor,
                              leading: containerView.leadingAnchor,
@@ -261,15 +268,15 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         
         descriptionLabel.anchor(top: descriptionLabelSection.bottomAnchor,
                                 leading: containerView.leadingAnchor,
-                                bottom: containerView.bottomAnchor,
+                                bottom: dynamicView.topAnchor,
                                 trailing: containerView.trailingAnchor,
                                 padding: .init(top: 8, left: 16, bottom: 8, right: 16))
         
-        detailsView.anchor(top: scrollView.topAnchor,
+        dynamicView.anchor(top: descriptionLabel.bottomAnchor,
                            leading: containerView.leadingAnchor,
-                           bottom: nil,
+                           bottom: containerView.bottomAnchor,
                            trailing: containerView.trailingAnchor,
-                           padding: .init(top: 250, left: 0, bottom: 0, right: 0)
+                           padding: .init(top: 8, left: 16, bottom: 8, right: 16)
         )
         
         subInfoStack.anchor(top: nil,
@@ -330,16 +337,8 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         
         reviewView = buildReviewView()?.view
         if let reviewView = reviewView {
-            containerView.addSubview(reviewView)
-            
-            // setup constraints
-            
-            reviewView.anchor(top: descriptionLabel.bottomAnchor, leading: containerView.leadingAnchor, bottom: nil, trailing: containerView.trailingAnchor)
-            
-            NSLayoutConstraint.activate([
-                reviewView.heightAnchor.constraint(equalToConstant: 170)
-            ])
-            
+            dynamicView.addSubview(reviewView)
+            reviewView.fillSuperview()
         }
         
         // Setup player
@@ -348,13 +347,14 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
             trailerButton.addTarget(self, action: #selector(launchTrailer), for: .touchUpInside)
             
             // add button to the hierachy
-            imageHeader.addSubview(trailerButton)
+            dynamicButtonView.addSubview(trailerButton)
+            trailerButton
+                .fillSuperview()
             
             // setup constraint
-            trailerButton.anchor(top: nil, leading: imageHeader.leadingAnchor, bottom: imageHeader.bottomAnchor, trailing: imageHeader.trailingAnchor)
-            
             NSLayoutConstraint.activate([
-                trailerButton.heightAnchor.constraint(equalToConstant: 50)
+                dynamicButtonView.heightAnchor.constraint(equalToConstant: 50),
+                trailerButton.heightAnchor.constraint(equalToConstant: 50),
             ])
         }
     }
@@ -362,6 +362,7 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
     @objc
     func launchTrailer() {
         // use this self.viewModel.movie?.trailerURL
+        
     }
     
     func buildReviewView() -> UIHostingController<ReviewView>? {
@@ -390,7 +391,7 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         stackView.spacing = 2
         
         viewModel.movie?.parentalRatings.forEach({ parentalRating in
-            let label = UILabel(frame: .zero)
+            let label = PaddingLabel(withInsets: 3, 3, 3, 3)
             label.text = parentalRating.authority + " - " + parentalRating.value
             label.layer.borderWidth = 1.5
             stackView.addArrangedSubview(label)
