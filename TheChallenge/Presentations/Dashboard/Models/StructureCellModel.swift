@@ -67,9 +67,8 @@ struct StructureCellModel: Mockable {
                 
                     .init(isInOffer: true, subtitle: "subtitle", contentID: "contewentID_12434",
                           onClick: .init(urlPage: "urlPage", boName: "boName", path: "path", displayName: "displayName",
-                                         displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: []),
+                                         displayTemplate: .detailPage), title: "title", urlImage: "urlImage", urlLogoChannel: "urlLogoChannel", type: "type", parentalRatings: [])
                 
-                
-            ]),
+            ])
     ]
 }

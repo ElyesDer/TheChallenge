@@ -43,13 +43,13 @@ class DetailsViewController: UIViewController {
         label.minimumScaleFactor = 0.6
         label.sizeToFit()
         label.font = .boldSystemFont(ofSize: 22)
-//        label.backgroundColor = .white.withAlphaComponent(0.7)
+        //        label.backgroundColor = .white.withAlphaComponent(0.7)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     lazy var subDetailsLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -107,13 +107,13 @@ class DetailsViewController: UIViewController {
         return stackView
     }()
     
-    
     var parentalView: UIView?
     var formatView: UIView?
     var castView: UIView?
+    var reviewView: UIView?
     
     var viewModel: DetailsViewModel!
-
+    
     var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -124,7 +124,7 @@ class DetailsViewController: UIViewController {
         
         // run viewDidLoad
         viewModel.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         addSubViewsComponents()
         setUpConstraints()
@@ -170,12 +170,12 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         
         containerView.addSubview(imageHeader)
         containerView.addSubview(detailsView)
-
+        
         containerView.addSubview(titleLabel)
         containerView.addSubview(subDetailsLabel)
         
         containerView.addSubview(castLabelSection)
-//        containerView.addSubview(castLabel)
+        //        containerView.addSubview(castLabel)
         containerView.addSubview(descriptionLabelSection)
         containerView.addSubview(descriptionLabel)
         
@@ -213,13 +213,12 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         NSLayoutConstraint.activate([
             headerConstraint
         ])
-
+        
         // setup Subviews
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: imageHeader.centerXAnchor),
-            subDetailsLabel.centerXAnchor.constraint(equalTo: imageHeader.centerXAnchor),
+            subDetailsLabel.centerXAnchor.constraint(equalTo: imageHeader.centerXAnchor)
         ])
-        
         
         titleLabel.anchor(top: nil,
                           leading: nil,
@@ -241,22 +240,22 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
                                 padding: .init(top: 8, left: 16, bottom: 8, right: 16))
         
         castContainer.anchor(top: castLabelSection.bottomAnchor,
-                                leading: containerView.leadingAnchor,
-                                bottom: nil,
-                                trailing: containerView.trailingAnchor,
-                                padding: .init(top: 8, left: 16, bottom: 8, right: 16))
+                             leading: containerView.leadingAnchor,
+                             bottom: nil,
+                             trailing: containerView.trailingAnchor,
+                             padding: .init(top: 8, left: 16, bottom: 8, right: 16))
         
         descriptionLabelSection.anchor(top: castContainer.bottomAnchor,
-                                leading: containerView.leadingAnchor,
-                                bottom: nil,
-                                trailing: containerView.trailingAnchor,
-                                padding: .init(top: 8, left: 16, bottom: 8, right: 16))
+                                       leading: containerView.leadingAnchor,
+                                       bottom: nil,
+                                       trailing: containerView.trailingAnchor,
+                                       padding: .init(top: 8, left: 16, bottom: 8, right: 16))
         
         descriptionLabel.anchor(top: descriptionLabelSection.bottomAnchor,
-                          leading: containerView.leadingAnchor,
-                          bottom: containerView.bottomAnchor,
-                          trailing: containerView.trailingAnchor,
-                          padding: .init(top: 8, left: 16, bottom: 8, right: 16))
+                                leading: containerView.leadingAnchor,
+                                bottom: containerView.bottomAnchor,
+                                trailing: containerView.trailingAnchor,
+                                padding: .init(top: 8, left: 16, bottom: 8, right: 16))
         
         detailsView.anchor(top: scrollView.topAnchor,
                            leading: containerView.leadingAnchor,
@@ -277,7 +276,7 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
             castContainer.heightAnchor.constraint(equalToConstant: 450),
             subInfoStack.heightAnchor.constraint(equalToConstant: 30),
             
-            subInfoStack.centerXAnchor.constraint(equalTo: imageHeader.centerXAnchor),
+            subInfoStack.centerXAnchor.constraint(equalTo: imageHeader.centerXAnchor)
         ])
         
     }
@@ -292,22 +291,15 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         subDetailsLabel.attributedText = NSAttributedString(attributedString: .init(string: viewModel.subdetails ?? ""))
         
         castLabelSection.text = "Cast"
-//        castLabel.text = viewModel.cast
         descriptionLabelSection.text = "Description"
         descriptionLabel.text = viewModel.description
         
         if let personnalities = viewModel.movie?.personnalities {
             castView = buildCastView(with: personnalities).view
             if let castView = castView {
-//                castView.debugView()
                 castContainer.addSubview(castView)
                 // setup constraint
                 castView.fillSuperview()
-//                castView.anchor(top: castLabelSection.bottomAnchor,
-//                                 leading: containerView.leadingAnchor,
-//                                 bottom: nil,
-//                                 trailing: containerView.trailingAnchor,
-//                                 padding: .init(top: 8, left: 16, bottom: 8, right: 16))
             }
         }
         
@@ -328,6 +320,27 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
             subInfoStack.addArrangedSubview(formatView)
         }
         
+        reviewView = buildReviewView()?.view
+        if let reviewView = reviewView {
+            containerView.addSubview(reviewView)
+            
+            // setup constraints
+            
+            reviewView.anchor(top: descriptionLabel.bottomAnchor, leading: containerView.leadingAnchor, bottom: nil, trailing: containerView.trailingAnchor)
+            
+            NSLayoutConstraint.activate([
+                reviewView.heightAnchor.constraint(equalToConstant: 170)
+            ])
+            
+        }
+        
+    }
+    
+    func buildReviewView() -> UIHostingController<ReviewView>? {
+        guard let review = self.viewModel.movie?.reviews else { return nil }
+        let reviewView = ReviewView(reviews: review)
+        
+        return UIHostingController(rootView: reviewView)
     }
     
     func buildFormatView() -> UIView? {
@@ -359,4 +372,3 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
     }
     
 }
-

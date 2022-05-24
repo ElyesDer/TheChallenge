@@ -100,7 +100,7 @@ extension DashboardViewController: ViewConstraintAutoLayoutSetup {
         }
         
         // register for delegate, diffableDataSource
-        diffableDataSource = DashboardTableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
+        diffableDataSource = DashboardTableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, _ in
             
             let rowRessource = self.viewModel.structuredRowProvider[indexPath.section].row.getRessource()
             

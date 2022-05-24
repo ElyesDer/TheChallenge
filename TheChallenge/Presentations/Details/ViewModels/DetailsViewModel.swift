@@ -32,7 +32,7 @@ class DetailsViewModel {
     var length: String?
     var subdetails: String?
     
-    var serviceProvider : DataServiceProviderProtocol!
+    var serviceProvider: DataServiceProviderProtocol!
     
     var cancellables = Set<AnyCancellable>()
     

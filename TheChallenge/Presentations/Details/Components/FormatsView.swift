@@ -18,7 +18,7 @@ class FormatsView: UIView {
         return stackView
     }()
     
-    var borederedLabel : UILabel {
+    var borederedLabel: UILabel {
         let label: UILabel = .init(frame: .zero)
         label.layer.borderWidth = 1.5
         label.layer.borderColor = UIColor.darkGray.cgColor

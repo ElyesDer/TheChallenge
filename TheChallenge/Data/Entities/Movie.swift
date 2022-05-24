@@ -25,7 +25,7 @@ struct Movie: Codable {
     let editorialTitle: String
 }
 
-extension Movie : Hashable {
+extension Movie: Hashable {
     static func == (lhs: Movie, rhs: Movie) -> Bool {
         lhs.contentID == rhs.contentID
     }
@@ -54,9 +54,21 @@ struct Personnality: Codable, Identifiable {
 
 // MARK: - Review
 struct Review: Codable {
+    var id = UUID()
     let name: String
     let stars: Stars
     let review: String?
+}
+
+extension Review: Hashable {
+    static func == (lhs: Review, rhs: Review) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(name)
+    }
 }
 
 // MARK: - Stars
@@ -65,8 +77,7 @@ struct Stars: Codable {
     let value: Double
 }
 
-
-extension Movie : Mockable {
+extension Movie: Mockable {
     
     typealias T = Movie
     
@@ -75,7 +86,7 @@ extension Movie : Mockable {
         .init(subtitle: "subtitle", sharingURL: "sharingURL",
               formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title",
               channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [],
-              productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
+              productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle")
         
 //            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
 //

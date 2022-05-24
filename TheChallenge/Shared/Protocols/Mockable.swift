@@ -9,5 +9,5 @@ import Foundation
 
 protocol Mockable {
     associatedtype T
-    static var mocks : [T] { get }
+    static var mocks: [T] { get }
 }

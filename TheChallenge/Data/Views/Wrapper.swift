@@ -16,7 +16,7 @@ struct ContentWrapper<T: Decodable>: Decodable {
 }
 
 protocol Configuration {
-    var size : CGSize? { get }
+    var size: CGSize? { get }
 }
 
 struct TableViewCellConfiguration: Configuration {

@@ -15,7 +15,7 @@ class UIModel {
 }
 
 protocol UIViewComponents: Hashable, AnyObject {
-    var id : UUID { get }
+    var id: UUID { get }
     var model: UIModel { get }
     func render() -> UIView
 }
