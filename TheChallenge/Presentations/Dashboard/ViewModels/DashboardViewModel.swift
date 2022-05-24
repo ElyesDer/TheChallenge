@@ -17,30 +17,45 @@ class DashboardViewModel {
     
     var cancellables = Set<AnyCancellable>()
     
+    var synchronisation: ContentSynchronisation
+    
     init(serviceProvider: DataServiceProviderProtocol = Requester()) {
         self.serviceProvider = serviceProvider
+        self.synchronisation = .init(serviceProvider: serviceProvider)
     }
     
     func load() {
-        serviceProvider
-            .request(from: APIEndpoint(
-                method: .get,
-                endURL: .movies), of: ContentWrapper<[Content]>.self)
-            .map { content in
-                StructureCellModel(
-                    row: content.type,
-                    content: content.contents)
-            }
-            .sink { completion in
-                switch completion {
-                    case .finished : break
-                    case .failure(let error) :
-                        print(error)
+        Task {
+            do {
+                let content = try await self.synchronisation
+                    .get()
+                DispatchQueue.main.async {
+                    self.structuredRowProvider = [StructureCellModel(row: content.type, content: content.contents)]
                 }
-            } receiveValue: { structuredRow in
-                // use this because ContentWrapper<[Content]> is not an array
-                self.structuredRowProvider = [structuredRow]
+            } catch {
+                // error handling
             }
-            .store(in: &cancellables)
+        }
+        
+        //        serviceProvider
+        //            .request(from: APIEndpoint(
+        //                method: .get,
+        //                endURL: .movies), of: ContentWrapper<[Content]>.self)
+        //            .map { content in
+        //                StructureCellModel(
+        //                    row: content.type,
+        //                    content: content.contents)
+        //            }
+        //            .sink { completion in
+        //                switch completion {
+        //                    case .finished : break
+        //                    case .failure(let error) :
+        //                        print(error)
+        //                }
+        //            } receiveValue: { structuredRow in
+        //                // use this because ContentWrapper<[Content]> is not an array
+        //                self.structuredRowProvider = [structuredRow]
+        //            }
+        //            .store(in: &cancellables)
     }
 }

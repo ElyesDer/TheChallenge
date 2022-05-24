@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - Content
-struct Content: Identifiable, Decodable {
+struct Content: Identifiable, Codable {
     var id: UUID = { UUID() }()
     
     let isInOffer: Bool
@@ -38,7 +38,7 @@ extension Content: Hashable {
     }
 }
 
-enum GenericDisplay: String, Decodable {
+enum GenericDisplay: String, Codable {
     
     case detailPage
     case infoView
@@ -57,7 +57,7 @@ enum GenericDisplay: String, Decodable {
 }
 
 // MARK: - OnClick
-struct OnClick: Decodable {
+struct OnClick: Codable {
     let urlPage: String
     let boName, path, displayName: String
     let displayTemplate: GenericDisplay

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct ContentWrapper<T: Decodable>: Decodable {
+struct ContentWrapper<T: Codable>: Codable {
     var strateMode: String
     var title: String
     var type: ContentRow
@@ -30,7 +30,7 @@ struct RowRessource<T>: Identifiable {
     var configuration: Configuration
 }
 
-enum ContentRow: String, CaseIterable, Decodable {
+enum ContentRow: String, CaseIterable, Codable {
     
     case contentRow
     case forYou
