@@ -36,9 +36,9 @@ struct ReviewView: View {
     
     func buildStarsView(rating: Double) -> AnyView {
         
-        let fullCount = Int(rating)
-        let emptyCount = Int(5 - rating)
-        let halfFullCount = (Float(fullCount + emptyCount) < 5) ? 1 : 0
+        let fullCount: Int = Int(rating)
+        let emptyCount: Int = Int(5 - rating)
+        let halfFullCount: Int = (Float(fullCount + emptyCount) < 5) ? 1 : 0
         
         return AnyView(
             HStack {
@@ -55,8 +55,6 @@ struct ReviewView: View {
                 .padding(.bottom, 5)
         )
     }
-    
-    
     
     var body: some View {
         VStack(alignment: .leading) {

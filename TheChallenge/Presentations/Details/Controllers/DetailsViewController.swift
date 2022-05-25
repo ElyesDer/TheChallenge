@@ -124,7 +124,7 @@ class DetailsViewController: UIViewController {
         return view
     }()
     
-    var descriptionConstraint : NSLayoutConstraint!
+    var descriptionConstraint: NSLayoutConstraint!
     
     lazy var dynamicView: UIView = {
         let view = UIView()
@@ -331,7 +331,7 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         // setup height constraint
         NSLayoutConstraint.activate([
             titleLabel.heightAnchor.constraint(equalToConstant: 30),
-            subDetailsLabel.heightAnchor.constraint(equalToConstant: 40),
+            subDetailsLabel.heightAnchor.constraint(equalToConstant: 40)
         ])
         
     }
@@ -368,7 +368,7 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
                 }
                 
                 NSLayoutConstraint.activate([
-                    castContainer.heightAnchor.constraint(equalToConstant: dynamicHeight),
+                    castContainer.heightAnchor.constraint(equalToConstant: dynamicHeight)
                 ])
             }
         }
@@ -410,7 +410,7 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
             // setup constraint
             NSLayoutConstraint.activate([
                 dynamicButtonView.heightAnchor.constraint(equalToConstant: 50),
-                trailerButton.widthAnchor.constraint(equalTo: containerView.widthAnchor),
+                trailerButton.widthAnchor.constraint(equalTo: containerView.widthAnchor)
             ])
         }
         
@@ -445,7 +445,7 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         stackView.spacing = 2
         
         viewModel.movie?.parentalRatings.forEach({ parentalRating in
-            let label = PaddingLabel(withInsets: 4,4,4,4)
+            let label = PaddingLabel(withInsets: 4, 4, 4, 4)
             label.text = parentalRating.authority + " - " + parentalRating.value
             label.layer.borderWidth = 1.5
             label.layer.borderColor = UIColor.white.cgColor

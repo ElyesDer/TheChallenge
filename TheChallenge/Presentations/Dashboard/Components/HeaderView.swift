@@ -35,7 +35,6 @@ class HeaderView: UIView {
     }
 }
 
-
 extension HeaderView: ViewConstraintAutoLayoutSetup {
     func addSubViewsComponents() {
         self.addSubview(headerLabel)

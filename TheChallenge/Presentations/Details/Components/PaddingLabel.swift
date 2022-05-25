@@ -8,8 +8,7 @@
 import Foundation
 import UIKit
 
-
-//MARK: source : https://gist.github.com/konnnn/d43af3bd525bb4c58f5c29fb14575b0d
+// MARK: source : https://gist.github.com/konnnn/d43af3bd525bb4c58f5c29fb14575b0d
 
 class PaddingLabel: UILabel {
     

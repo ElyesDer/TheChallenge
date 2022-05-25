@@ -19,7 +19,7 @@ class FormatsView: UIView {
     }()
     
     var borederedLabel: PaddingLabel {
-        let label: PaddingLabel = .init(withInsets: 4,4,4,4)
+        let label: PaddingLabel = .init(withInsets: 4, 4, 4, 4)
         label.layer.borderWidth = 1.5
         label.layer.borderColor = UIColor.white.cgColor
         label.textAlignment = .center
