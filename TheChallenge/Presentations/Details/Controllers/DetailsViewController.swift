@@ -109,8 +109,6 @@ class DetailsViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor.red // (named: "bgBlue")
         button.setTitle("Play trailer", for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
         return button
     }()
     
@@ -250,7 +248,7 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         
         imageHeader.addSubview(headerContentStack)
         
-//        containerView.addSubview(dynamicButtonView)
+        containerView.addSubview(dynamicButtonView)
         containerView.addSubview(castLabelSection)
         
         containerView.addSubview(descriptionLabelSection)
@@ -293,13 +291,13 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
                                   padding: .init(top: 0, left: 0, bottom: 8, right: 0)
         )
         
-//        dynamicButtonView.anchor(top: imageHeader.bottomAnchor,
-//                                 leading: containerView.leadingAnchor,
-//                                 bottom: castLabelSection.topAnchor,
-//                                 trailing: containerView.trailingAnchor,
-//                                 padding: .init(top: 0, left: 16, bottom: 16, right: 16))
+        dynamicButtonView.anchor(top: imageHeader.bottomAnchor,
+                                 leading: containerView.leadingAnchor,
+                                 bottom: castLabelSection.topAnchor,
+                                 trailing: containerView.trailingAnchor,
+                                 padding: .init(top: 0, left: 0, bottom: 16, right: 0))
         
-        castLabelSection.anchor(top: imageHeader.bottomAnchor,
+        castLabelSection.anchor(top: dynamicButtonView.bottomAnchor,
                                 leading: containerView.leadingAnchor,
                                 bottom: nil,
                                 trailing: containerView.trailingAnchor,
@@ -412,16 +410,8 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
             // setup constraint
             NSLayoutConstraint.activate([
                 dynamicButtonView.heightAnchor.constraint(equalToConstant: 50),
-//                trailerButton.heightAnchor.constraint(equalToConstant: 50),
+                trailerButton.widthAnchor.constraint(equalTo: containerView.widthAnchor),
             ])
-            
-            headerContentStack.addArrangedSubview(dynamicButtonView)
-            // setup constraint
-            NSLayoutConstraint.activate([
-//                trailerButton.heightAnchor.constraint(equalToConstant: 40),
-                trailerButton.widthAnchor.constraint(equalTo: headerContentStack.widthAnchor, multiplier: 3/4)
-            ])
-            
         }
         
         // Setup share button

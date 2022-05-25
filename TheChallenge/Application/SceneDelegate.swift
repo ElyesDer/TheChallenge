@@ -24,6 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navController = UINavigationController()
         navController.navigationItem.largeTitleDisplayMode = .always
         navController.viewControllers = [firstViewController]
+        navController.navigationBar.tintColor = .white
         window.rootViewController = navController
         self.window = window
         window.makeKeyAndVisible()
