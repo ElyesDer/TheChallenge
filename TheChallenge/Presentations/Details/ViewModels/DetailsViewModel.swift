@@ -17,6 +17,7 @@ class DetailsViewModel {
         case idle
     }
     
+    let urlPage: String
     let path: String
     
     @Published
@@ -32,47 +33,75 @@ class DetailsViewModel {
     var length: String?
     var subdetails: String?
     
-    var serviceProvider: DataServiceProviderProtocol!
-    
     var cancellables = Set<AnyCancellable>()
     
     @Published
     var loadingState: DetailsViewModelLoadingState = .idle
     
-    init(from path: String, using serviceProvider: DataServiceProviderProtocol = Requester()) {
-        // load content form path
-        self.path = path
+    var serviceProvider: DataServiceProviderProtocol!
+    var synchronisation: MovieSynchronisation!
+    
+    init(from urlPage: String, with path: String, using serviceProvider: DataServiceProviderProtocol = Requester()) {
         self.serviceProvider = serviceProvider
+        self.synchronisation = .init(serviceProvider: serviceProvider)
+        // load content form path
+        self.urlPage = urlPage
+        self.serviceProvider = serviceProvider
+        self.path = path
     }
     
     func viewDidLoad() {
         // load url content
         loadingState = .loading
-        serviceProvider
-            .request(from: APIEndpoint(
-                method: .get,
-                endURL: .custom(self.path)), of: Movie.self)
-            .sink { completion in
-                switch completion {
-                    case .finished :
-                        self.loadingState = .loaded
-                        break
-                    case .failure(let error) :
-                        self.loadingState = .failed(error.localizedDescription)
+        
+        Task {
+            do {
+                let movie = try await self.synchronisation
+                    .get(url: self.urlPage, filePath: self.path)
+                DispatchQueue.main.async {
+                    self.imageHeader = movie.imageURL
+                    self.imagePreview = movie.channelLogoURL
+                    self.title = movie.title
+                    self.subdetails = movie.editorialTitle
+                    self.description = movie.summary
+                    self.rating = movie.reviews.map { $0.stars.value }.first ?? 0.0
+                    self.year = movie.productionYear
+                    self.length = movie.duration
+                    self.cast = movie.personnalities.flatMap { $0.personnalitiesList }.joined(separator: ", ")
+                    self.movie = movie
+                    self.loadingState = .loaded
                 }
-                
-            } receiveValue: { movie in
-                self.imageHeader = movie.imageURL
-                self.imagePreview = movie.channelLogoURL
-                self.title = movie.title
-                self.subdetails = movie.editorialTitle
-                self.description = movie.summary
-                self.rating = movie.reviews.map { $0.stars.value }.first ?? 0.0
-                self.year = movie.productionYear
-                self.length = movie.duration
-                self.cast = movie.personnalities.flatMap { $0.personnalitiesList }.joined(separator: ", ")
-                self.movie = movie
+            } catch {
+                // error handling
+                self.loadingState = .failed(error.localizedDescription)
             }
-            .store(in: &cancellables)
+        }
+        
+//        serviceProvider
+//            .request(from: APIEndpoint(
+//                method: .get,
+//                endURL: .custom(self.urlPage)), of: Movie.self)
+//            .sink { completion in
+//                switch completion {
+//                    case .finished :
+//                        self.loadingState = .loaded
+//                        break
+//                    case .failure(let error) :
+//                        self.loadingState = .failed(error.localizedDescription)
+//                }
+//                
+//            } receiveValue: { movie in
+//                self.imageHeader = movie.imageURL
+//                self.imagePreview = movie.channelLogoURL
+//                self.title = movie.title
+//                self.subdetails = movie.editorialTitle
+//                self.description = movie.summary
+//                self.rating = movie.reviews.map { $0.stars.value }.first ?? 0.0
+//                self.year = movie.productionYear
+//                self.length = movie.duration
+//                self.cast = movie.personnalities.flatMap { $0.personnalitiesList }.joined(separator: ", ")
+//                self.movie = movie
+//            }
+//            .store(in: &cancellables)
     }
 }

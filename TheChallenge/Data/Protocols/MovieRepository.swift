@@ -8,9 +8,9 @@
 import Foundation
 import Combine
 
-protocol Repository {
+protocol MovieRepository {
     associatedtype Entity
 
-    func get() async throws -> ContentWrapper<[Content]>
+    func get(url: String, filePath: String) async throws -> Entity
 
 }

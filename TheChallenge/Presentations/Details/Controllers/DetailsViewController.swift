@@ -10,12 +10,14 @@ import Combine
 import SwiftUI
 import AVFoundation
 import AVKit
+import Kingfisher
 
 class DetailsViewController: UIViewController {
     
     lazy var imageHeader: UIImageView = {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -28,11 +30,12 @@ class DetailsViewController: UIViewController {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = .white
         label.numberOfLines = 0
+        label.textAlignment = .center
         label.minimumScaleFactor = 0.6
         label.sizeToFit()
-        label.font = .boldSystemFont(ofSize: 22)
+        label.font = .boldSystemFont(ofSize: 24)
         //        label.backgroundColor = .white.withAlphaComponent(0.7)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -40,8 +43,12 @@ class DetailsViewController: UIViewController {
     
     lazy var subDetailsLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 16)
+        label.numberOfLines = 2
+        label.sizeToFit()
+        label.font = .systemFont(ofSize: 14)
+        label.textColor = .white
+        label.minimumScaleFactor = 0.5
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -99,27 +106,57 @@ class DetailsViewController: UIViewController {
     
     lazy var trailerButton: UIButton = {
         let button = UIButton(frame: .zero)
-        button.backgroundColor = .blue
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor.red // (named: "bgBlue")
         button.setTitle("Play trailer", for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
         return button
     }()
     
+    lazy var headerView: UIView = {
+        let view = UIView(frame: .zero)
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.layer.opacity = 0.6
+        view.addSubview(blurEffectView)
+        
+        return view
+    }()
+    
     var descriptionConstraint : NSLayoutConstraint!
     
-    var dynamicView: UIView = {
+    lazy var dynamicView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
     }()
     
-    var dynamicButtonView: UIView = {
+    lazy var dynamicButtonView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         
         return view
+    }()
+    
+    lazy var headerContentStack: UIStackView = {
+        let stackView = UIStackView(frame: .zero)
+        stackView.spacing = 6
+        stackView.alignment = .center
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        
+        let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.layer.opacity = 0.6
+        blurEffectView.roundCorners(corners: [.topLeft, .topRight], radius: 20)
+        stackView.addSubview(blurEffectView)
+        return stackView
     }()
     
     var parentalView: UIView?
@@ -211,17 +248,15 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         containerView.addSubview(imageHeader)
         scrollView.addSubview(containerView)
         
-        containerView.addSubview(titleLabel)
-        containerView.addSubview(subDetailsLabel)
-        containerView.addSubview(dynamicButtonView)
+        imageHeader.addSubview(headerContentStack)
+        
+//        containerView.addSubview(dynamicButtonView)
         containerView.addSubview(castLabelSection)
-        //        containerView.addSubview(castLabel)
+        
         containerView.addSubview(descriptionLabelSection)
         containerView.addSubview(descriptionLabel)
         
         containerView.addSubview(castContainer)
-        
-        imageHeader.addSubview(subInfoStack)
         
         containerView.addSubview(dynamicView)
     }
@@ -254,36 +289,21 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
             headerConstraint
         ])
         
-        // setup Subviews
-        NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: imageHeader.centerXAnchor),
-            subDetailsLabel.centerXAnchor.constraint(equalTo: imageHeader.centerXAnchor)
-        ])
-        
-        titleLabel.anchor(top: nil,
-                          leading: nil,
-                          bottom: subDetailsLabel.topAnchor,
-                          trailing: nil,
-                          padding: .init(top: 4, left: 0, bottom: 4, right: 0)
+        headerContentStack.anchor(top: nil, leading: imageHeader.leadingAnchor, bottom: imageHeader.bottomAnchor, trailing: imageHeader.trailingAnchor,
+                                  padding: .init(top: 0, left: 0, bottom: 8, right: 0)
         )
         
-        subDetailsLabel.anchor(top: nil,
-                               leading: nil,
-                               bottom: imageHeader.bottomAnchor,
-                               trailing: nil,
-                               padding: .init(top: 4, left: 0, bottom: 42, right: 0))
+//        dynamicButtonView.anchor(top: imageHeader.bottomAnchor,
+//                                 leading: containerView.leadingAnchor,
+//                                 bottom: castLabelSection.topAnchor,
+//                                 trailing: containerView.trailingAnchor,
+//                                 padding: .init(top: 0, left: 16, bottom: 16, right: 16))
         
-        dynamicButtonView.anchor(top: imageHeader.bottomAnchor,
-                                 leading: containerView.leadingAnchor,
-                                 bottom: castLabelSection.topAnchor,
-                                 trailing: containerView.trailingAnchor,
-                                 padding: .init(top: 0, left: 16, bottom: 0, right: 16))
-        
-        castLabelSection.anchor(top: dynamicButtonView.bottomAnchor,
+        castLabelSection.anchor(top: imageHeader.bottomAnchor,
                                 leading: containerView.leadingAnchor,
                                 bottom: nil,
                                 trailing: containerView.trailingAnchor,
-                                padding: .init(top: 0, left: 16, bottom: 8, right: 16))
+                                padding: .init(top: 16, left: 16, bottom: 8, right: 16))
         
         castContainer.anchor(top: castLabelSection.bottomAnchor,
                              leading: containerView.leadingAnchor,
@@ -301,40 +321,34 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
                                 leading: containerView.leadingAnchor,
                                 bottom: dynamicView.topAnchor,
                                 trailing: containerView.trailingAnchor,
-                                padding: .init(top: 8, left: 16, bottom: 8, right: 16))
+                                padding: .init(top: 8, left: 16, bottom: 24, right: 16))
         
         dynamicView.anchor(top: descriptionLabel.bottomAnchor,
                            leading: containerView.leadingAnchor,
                            bottom: containerView.bottomAnchor,
                            trailing: containerView.trailingAnchor,
-                           padding: .init(top: 8, left: 16, bottom: 8, right: 16)
-        )
-        
-        subInfoStack.anchor(top: nil,
-                            leading: nil,
-                            bottom: imageHeader.bottomAnchor,
-                            trailing: nil,
-                            padding: .init(top: 0, left: 0, bottom: 8, right: 0)
+                           padding: .init(top: 24, left: 0, bottom: 8, right: 16)
         )
         
         // setup height constraint
         NSLayoutConstraint.activate([
-            castContainer.heightAnchor.constraint(equalToConstant: 450),
-            subInfoStack.heightAnchor.constraint(equalToConstant: 30),
-            
-            subInfoStack.centerXAnchor.constraint(equalTo: imageHeader.centerXAnchor)
+            titleLabel.heightAnchor.constraint(equalToConstant: 30),
+            subDetailsLabel.heightAnchor.constraint(equalToConstant: 40),
         ])
         
     }
     
     func setUpViews() {
         // setup image loading
-        imageHeader.image = .init(named: "placeholder")
+        imageHeader.kf.setImage(with: URL(string: viewModel.imageHeader ?? ""),
+                                   placeholder: UIImage(named: "placeholder")!)
         
         titleLabel.text = viewModel.title
-        descriptionLabel.text = viewModel.description
+        subDetailsLabel.text = viewModel.subdetails
         
-        subDetailsLabel.attributedText = NSAttributedString(attributedString: .init(string: viewModel.subdetails ?? ""))
+        // setup header stackview
+        headerContentStack.addArrangedSubview(titleLabel)
+        headerContentStack.addArrangedSubview(subDetailsLabel)
         
         castLabelSection.text = "Cast"
         descriptionLabelSection.text = "Description"
@@ -346,6 +360,18 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
                 castContainer.addSubview(castView)
                 // setup constraint
                 castView.fillSuperview()
+                
+                // compute height
+                var dynamicHeight: CGFloat = 0
+                personnalities.forEach { personnality in
+                    if !personnality.personnalitiesList.isEmpty {
+                        dynamicHeight += 110
+                    }
+                }
+                
+                NSLayoutConstraint.activate([
+                    castContainer.heightAnchor.constraint(equalToConstant: dynamicHeight),
+                ])
             }
         }
         
@@ -355,15 +381,16 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         if let parentalView = parentalView {
             containerView.addSubview(parentalView)
             
-            parentalView.anchor(top: titleLabel.topAnchor,
-                                leading: titleLabel.trailingAnchor,
-                                bottom: titleLabel.bottomAnchor, trailing: nil,
+            parentalView.anchor(top: headerContentStack.topAnchor,
+                                leading: headerContentStack.trailingAnchor,
+                                bottom: nil, trailing: nil,
                                 padding: .init(top: 0, left: 12, bottom: 0, right: 0))
         }
         
         formatView = buildFormatView()
         if let formatView = formatView {
             subInfoStack.addArrangedSubview(formatView)
+            headerContentStack.addArrangedSubview(subInfoStack)
         }
         
         reviewView = buildReviewView()?.view
@@ -376,8 +403,8 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         if self.viewModel.movie?.trailerURL != nil {
             // setup gesture
             trailerButton.addTarget(self, action: #selector(launchTrailer), for: .touchUpInside)
-            
             // add button to the hierachy
+            
             dynamicButtonView.addSubview(trailerButton)
             trailerButton
                 .fillSuperview()
@@ -385,8 +412,16 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
             // setup constraint
             NSLayoutConstraint.activate([
                 dynamicButtonView.heightAnchor.constraint(equalToConstant: 50),
-                trailerButton.heightAnchor.constraint(equalToConstant: 50),
+//                trailerButton.heightAnchor.constraint(equalToConstant: 50),
             ])
+            
+            headerContentStack.addArrangedSubview(dynamicButtonView)
+            // setup constraint
+            NSLayoutConstraint.activate([
+//                trailerButton.heightAnchor.constraint(equalToConstant: 40),
+                trailerButton.widthAnchor.constraint(equalTo: headerContentStack.widthAnchor, multiplier: 3/4)
+            ])
+            
         }
         
         // Setup share button
@@ -420,9 +455,12 @@ extension DetailsViewController: ViewConstraintAutoLayoutSetup {
         stackView.spacing = 2
         
         viewModel.movie?.parentalRatings.forEach({ parentalRating in
-            let label = PaddingLabel(withInsets: 3, 3, 3, 3)
+            let label = PaddingLabel(withInsets: 4,4,4,4)
             label.text = parentalRating.authority + " - " + parentalRating.value
             label.layer.borderWidth = 1.5
+            label.layer.borderColor = UIColor.white.cgColor
+            label.textAlignment = .center
+            label.textColor = .white
             stackView.addArrangedSubview(label)
         })
         

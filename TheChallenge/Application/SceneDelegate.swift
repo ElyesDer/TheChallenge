@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         let navController = UINavigationController()
-        
+        navController.navigationItem.largeTitleDisplayMode = .always
         navController.viewControllers = [firstViewController]
         window.rootViewController = navController
         self.window = window

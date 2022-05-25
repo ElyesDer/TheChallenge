@@ -11,6 +11,12 @@ struct ReviewView: View {
     
     var reviews: [Review]
     
+    @State fileprivate var presendDetails: Bool = false
+    @State fileprivate var selectedItemIndex: Int = 0 {
+        didSet {
+            presendDetails.toggle()
+        }
+    }
     
     private var fullStar: some View {
         Image(systemName: "star.fill").foregroundColor(.yellow)
@@ -31,8 +37,8 @@ struct ReviewView: View {
     func buildStarsView(rating: Double) -> AnyView {
         
         let fullCount = Int(rating)
-        let emptyCount = Int(6 - rating)
-        let halfFullCount = (Float(fullCount + emptyCount) < 6) ? 1 : 0
+        let emptyCount = Int(5 - rating)
+        let halfFullCount = (Float(fullCount + emptyCount) < 5) ? 1 : 0
         
         return AnyView(
             HStack {
@@ -50,39 +56,66 @@ struct ReviewView: View {
         )
     }
     
+    
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text("Review Section")
                 .bold()
+                .padding(.leading)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(reviews, id: \.id) { item in
+                    ForEach(Array(zip(reviews.indices, reviews)), id: \.0) { index, item in
+
                         VStack(alignment: .leading) {
                             
                             HStack {
                                 Text(item.name)
+                                    .bold()
                                 Spacer()
                             }
                             
                             buildStarsView(rating: item.stars.value)
                             
                             Text(item.review ?? "No comment")
-                                .minimumScaleFactor(0.5)
+                                .minimumScaleFactor(0.7)
                                 .lineLimit(5)
                             
                             Spacer()
                         }
                         .frame(width: 200, height: 100, alignment: .center)
-                        .padding(10)
-                        .background(Color.gray)
+                        .padding(15)
+                        .background( Color("bgGray") )
                         .cornerRadius(15)
-                        
+                        .onTapGesture {
+                            selectedItemIndex = index
+                        }
                     }
                 }
                 .padding(.leading)
             }
         }
+        .sheet(isPresented: $presendDetails, content: {
+            let item = reviews[selectedItemIndex]
+            VStack(alignment: .leading) {
+                
+                HStack {
+                    Text(item.name)
+                        .bold()
+                    Spacer()
+                }
+                
+                buildStarsView(rating: item.stars.value)
+                
+                Text(item.review ?? "No comment")
+                    .lineLimit(nil)
+                
+                Spacer()
+            }.edgesIgnoringSafeArea(.all)
+            .padding()
+            .background( Color("bgGray") )
+        })
     }
 }
 

@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		E91A75F7283D455A0008A732 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91A75F6283D455A0008A732 /* PaddingLabel.swift */; };
+		E91A7606283D5AF50008A732 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91A7605283D5AF50008A732 /* CacheManager.swift */; };
+		E91A7609283D5B1D0008A732 /* Files in Frameworks */ = {isa = PBXBuildFile; productRef = E91A7608283D5B1D0008A732 /* Files */; };
+		E91A760D283D5BC50008A732 /* MovieRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91A760C283D5BC50008A732 /* MovieRepository.swift */; };
+		E91A7610283D5D3A0008A732 /* ContentSynchronisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91A760F283D5D3A0008A732 /* ContentSynchronisation.swift */; };
+		E99997B8283DACFF00D1FFEC /* MovieSynchronisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99997B7283DACFF00D1FFEC /* MovieSynchronisation.swift */; };
+		E99997BA283DB09200D1FFEC /* ContentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99997B9283DB09100D1FFEC /* ContentRepository.swift */; };
+		E99997BD283DBA0200D1FFEC /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99997BC283DBA0200D1FFEC /* UIViewController+.swift */; };
+		E99997BF283DBC2700D1FFEC /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E99997BE283DBC2700D1FFEC /* Colors.xcassets */; };
+		E99997C2283DCCA000D1FFEC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E99997C1283DCCA000D1FFEC /* Kingfisher */; };
+		E99997C5283E09C000D1FFEC /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99997C4283E09C000D1FFEC /* UIView+.swift */; };
 		E9A9F736283CCC6D00C16445 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A9F735283CCC6D00C16445 /* HeaderView.swift */; };
 		E9A9F73B283CCD4700C16445 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9A9F73D283CCD4700C16445 /* Localizable.strings */; };
 		E9B2CC8F2838614700910781 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B2CC8E2838614700910781 /* DetailsViewController.swift */; };
@@ -61,6 +71,14 @@
 
 /* Begin PBXFileReference section */
 		E91A75F6283D455A0008A732 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		E91A7605283D5AF50008A732 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
+		E91A760C283D5BC50008A732 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
+		E91A760F283D5D3A0008A732 /* ContentSynchronisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSynchronisation.swift; sourceTree = "<group>"; };
+		E99997B7283DACFF00D1FFEC /* MovieSynchronisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSynchronisation.swift; sourceTree = "<group>"; };
+		E99997B9283DB09100D1FFEC /* ContentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRepository.swift; sourceTree = "<group>"; };
+		E99997BC283DBA0200D1FFEC /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		E99997BE283DBC2700D1FFEC /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		E99997C4283E09C000D1FFEC /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		E9A9F735283CCC6D00C16445 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		E9A9F737283CCCEE00C16445 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E9A9F73C283CCD4700C16445 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -105,6 +123,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E99997C2283DCCA000D1FFEC /* Kingfisher in Frameworks */,
+				E91A7609283D5B1D0008A732 /* Files in Frameworks */,
 				E9E0D5A5283784E9000DA6F6 /* Inject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,6 +146,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E91A7604283D5AEA0008A732 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				E91A7605283D5AF50008A732 /* CacheManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		E91A760A283D5B660008A732 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E91A760E283D5D2A0008A732 /* Synchronisation */,
+				E91A760B283D5B910008A732 /* Protocols */,
+				E9E0D5A62837868A000DA6F6 /* Models */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E91A760B283D5B910008A732 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E91A760C283D5BC50008A732 /* MovieRepository.swift */,
+				E99997B9283DB09100D1FFEC /* ContentRepository.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		E91A760E283D5D2A0008A732 /* Synchronisation */ = {
+			isa = PBXGroup;
+			children = (
+				E91A760F283D5D3A0008A732 /* ContentSynchronisation.swift */,
+				E99997B7283DACFF00D1FFEC /* MovieSynchronisation.swift */,
+			);
+			path = Synchronisation;
+			sourceTree = "<group>";
+		};
 		E9A9F738283CCD3300C16445 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,9 +250,9 @@
 		E9E0D564283780BD000DA6F6 /* TheChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				E91A760A283D5B660008A732 /* Data */,
 				E9E0D5D22837F6E7000DA6F6 /* Shared */,
 				E9E0D5B0283788B9000DA6F6 /* Network */,
-				E9E0D5A62837868A000DA6F6 /* Data */,
 				E9E0D59E28378457000DA6F6 /* Presentations */,
 				E9E0D59928378180000DA6F6 /* Ressources */,
 				E9E0D5982837815E000DA6F6 /* Application */,
@@ -238,6 +294,7 @@
 			children = (
 				E9A9F738283CCD3300C16445 /* Localization */,
 				E9E0D571283780BF000DA6F6 /* Assets.xcassets */,
+				E99997BE283DBC2700D1FFEC /* Colors.xcassets */,
 				E9E0D573283780BF000DA6F6 /* LaunchScreen.storyboard */,
 			);
 			path = Ressources;
@@ -273,13 +330,13 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		E9E0D5A62837868A000DA6F6 /* Data */ = {
+		E9E0D5A62837868A000DA6F6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				E9E0D5AA28378702000DA6F6 /* Entities */,
 				E9E0D5A9283786F8000DA6F6 /* Views */,
 			);
-			path = Data;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		E9E0D5A9283786F8000DA6F6 /* Views */ = {
@@ -329,6 +386,8 @@
 			isa = PBXGroup;
 			children = (
 				E9E0D5BA2837932C000DA6F6 /* UIView+Autolayout.swift */,
+				E99997BC283DBA0200D1FFEC /* UIViewController+.swift */,
+				E99997C4283E09C000D1FFEC /* UIView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -395,6 +454,7 @@
 		E9E0D5D22837F6E7000DA6F6 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				E91A7604283D5AEA0008A732 /* Managers */,
 				E9E0D5D32837F6EF000DA6F6 /* Protocols */,
 			);
 			path = Shared;
@@ -434,6 +494,8 @@
 			name = TheChallenge;
 			packageProductDependencies = (
 				E9E0D5A4283784E9000DA6F6 /* Inject */,
+				E91A7608283D5B1D0008A732 /* Files */,
+				E99997C1283DCCA000D1FFEC /* Kingfisher */,
 			);
 			productName = TheChallenge;
 			productReference = E9E0D562283780BD000DA6F6 /* TheChallenge.app */;
@@ -511,6 +573,8 @@
 			mainGroup = E9E0D559283780BD000DA6F6;
 			packageReferences = (
 				E9E0D5A3283784E9000DA6F6 /* XCRemoteSwiftPackageReference "Inject" */,
+				E91A7607283D5B1D0008A732 /* XCRemoteSwiftPackageReference "Files" */,
+				E99997C0283DCCA000D1FFEC /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = E9E0D563283780BD000DA6F6 /* Products */;
 			projectDirPath = "";
@@ -529,6 +593,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9E0D575283780BF000DA6F6 /* LaunchScreen.storyboard in Resources */,
+				E99997BF283DBC2700D1FFEC /* Colors.xcassets in Resources */,
 				E9A9F73B283CCD4700C16445 /* Localizable.strings in Resources */,
 				E9E0D572283780BF000DA6F6 /* Assets.xcassets in Resources */,
 			);
@@ -575,17 +640,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E91A7606283D5AF50008A732 /* CacheManager.swift in Sources */,
 				E9E0D5D12837C4C8000DA6F6 /* MovieCollectionViewCell.swift in Sources */,
 				E9E0D5C428379650000DA6F6 /* DashboardTableViewDiffableDataSource.swift in Sources */,
 				E9E0D570283780BD000DA6F6 /* TheChallenge.xcdatamodeld in Sources */,
 				E9E0D566283780BD000DA6F6 /* AppDelegate.swift in Sources */,
+				E91A7610283D5D3A0008A732 /* ContentSynchronisation.swift in Sources */,
 				E9E0D5B2283789C6000DA6F6 /* Requester.swift in Sources */,
 				E9B2CC96283AF6FB00910781 /* CastView.swift in Sources */,
 				E9E0D5C128379569000DA6F6 /* DashboardViewModel.swift in Sources */,
 				E9A9F736283CCC6D00C16445 /* HeaderView.swift in Sources */,
 				E9E0D5CF2837BEE8000DA6F6 /* MainCollectionTableViewCell.swift in Sources */,
 				E9B2CC912838624400910781 /* DetailsViewModel.swift in Sources */,
+				E99997C5283E09C000D1FFEC /* UIView+.swift in Sources */,
 				E9B2CC93283A846E00910781 /* FormatsView.swift in Sources */,
+				E99997B8283DACFF00D1FFEC /* MovieSynchronisation.swift in Sources */,
 				E91A75F7283D455A0008A732 /* PaddingLabel.swift in Sources */,
 				E9E0D5D82837F768000DA6F6 /* StructureCellModel.swift in Sources */,
 				E9B2CC9C283BC7D600910781 /* ReviewView.swift in Sources */,
@@ -597,9 +666,12 @@
 				E9B2CC8F2838614700910781 /* DetailsViewController.swift in Sources */,
 				E9E0D5A8283786F0000DA6F6 /* Wrapper.swift in Sources */,
 				E9E0D568283780BD000DA6F6 /* SceneDelegate.swift in Sources */,
+				E99997BA283DB09200D1FFEC /* ContentRepository.swift in Sources */,
 				E9E0D5BB2837932C000DA6F6 /* UIView+Autolayout.swift in Sources */,
 				E9E0D5B4283789F7000DA6F6 /* APIService.swift in Sources */,
+				E99997BD283DBA0200D1FFEC /* UIViewController+.swift in Sources */,
 				E9E0D5A22837846D000DA6F6 /* DashboardViewController.swift in Sources */,
+				E91A760D283D5BC50008A732 /* MovieRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -950,6 +1022,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E91A7607283D5B1D0008A732 /* XCRemoteSwiftPackageReference "Files" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JohnSundell/Files";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+		E99997C0283DCCA000D1FFEC /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		E9E0D5A3283784E9000DA6F6 /* XCRemoteSwiftPackageReference "Inject" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/krzysztofzablocki/Inject";
@@ -961,6 +1049,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E91A7608283D5B1D0008A732 /* Files */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E91A7607283D5B1D0008A732 /* XCRemoteSwiftPackageReference "Files" */;
+			productName = Files;
+		};
+		E99997C1283DCCA000D1FFEC /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E99997C0283DCCA000D1FFEC /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		E9E0D5A4283784E9000DA6F6 /* Inject */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E9E0D5A3283784E9000DA6F6 /* XCRemoteSwiftPackageReference "Inject" */;

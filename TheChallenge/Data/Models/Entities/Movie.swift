@@ -54,7 +54,6 @@ struct Personnality: Codable, Identifiable {
 
 // MARK: - Review
 struct Review: Codable {
-    var id: UUID? = UUID()
     let name: String
     let stars: Stars
     let review: String?
@@ -62,11 +61,10 @@ struct Review: Codable {
 
 extension Review: Hashable {
     static func == (lhs: Review, rhs: Review) -> Bool {
-        lhs.id == rhs.id
+        lhs.name == rhs.name
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
         hasher.combine(name)
     }
 }

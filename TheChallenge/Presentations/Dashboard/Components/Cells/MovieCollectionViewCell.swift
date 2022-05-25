@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 class MovieCollectionViewCell: UICollectionViewCell {
 
@@ -25,7 +26,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
         // setup views
         addSubViewsComponents()
         setUpConstraints()
-        setUpViews()
     }
     
     required init?(coder: NSCoder) {
@@ -36,7 +36,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
         self.content = content
         
         // setup image loading
-        movieImageView.image = .init(named: "placeholder")
+        setUpViews()
     }
 }
 
@@ -51,6 +51,7 @@ extension MovieCollectionViewCell: ViewConstraintAutoLayoutSetup {
     }
     
     func setUpViews() {
-        movieImageView.image = .init(named: "placeholder")!
+        movieImageView.kf.setImage(with: URL(string: content.urlImage),
+                                   placeholder: UIImage(named: "placeholder")!)
     }
 }

@@ -20,7 +20,6 @@ class MainCollectionTableViewCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         //        layout.estimatedItemSize = CGSize(width: 70, height: 100)
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 6
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
@@ -29,6 +28,7 @@ class MainCollectionTableViewCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.isUserInteractionEnabled = true
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
         return collectionView
     }()
     
@@ -37,6 +37,8 @@ class MainCollectionTableViewCell: UITableViewCell {
     var diffableDataSource: MainCollectionDiffableDataSource!
     
     weak var gestureDelegate: GenericViewGestureHandler?
+    
+    let screenWidth = UIScreen.main.bounds.width
     
     func setup(with content: [Content], gestureDelegate: GenericViewGestureHandler) {
         self.contents = content
@@ -96,7 +98,7 @@ extension MainCollectionTableViewCell: ViewConstraintAutoLayoutSetup {
 
 extension MainCollectionTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: 120, height: 140)
+        return .init(width: screenWidth / 3.5, height: screenWidth / 2.5)
     }
 }
 

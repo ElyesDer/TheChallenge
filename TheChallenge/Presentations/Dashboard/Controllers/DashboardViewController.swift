@@ -23,13 +23,6 @@ class DashboardViewController: UIViewController {
         return tableView
     }()
     
-    lazy var headerView: HeaderView = {
-        let headerView = HeaderView()
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return headerView
-    }()
-    
     private lazy var refreshControl = {
         return UIRefreshControl()
     }()
@@ -55,6 +48,9 @@ class DashboardViewController: UIViewController {
         setUpConstraints()
         setUpViews()
         bind(to: viewModel)
+        
+        // setup navigation bar
+        self.title = "myCanal"
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -80,30 +76,21 @@ extension DashboardViewController: UITableViewDelegate {
         if let height = configuration.size?.height {
             return height
         }
-        return UIScreen.main.bounds.height
+        return UIScreen.main.bounds.height - self.topbarHeight
     }
 }
 
 extension DashboardViewController: ViewConstraintAutoLayoutSetup {
     func addSubViewsComponents() {
         view.addSubview(tableView)
-        view.addSubview(headerView)
     }
     
     internal func setUpConstraints() {
         
-        headerView.anchor(top: view.topAnchor,
-                          leading: view.leadingAnchor,
-                          bottom: nil,
-                          trailing: view.trailingAnchor,
-                          padding: .init(top: 0, left: 0, bottom: 0, right: 0))
-        
-        tableView.anchor(top: headerView.bottomAnchor,
+        tableView.anchor(top: view.topAnchor,
                          leading: view.safeAreaLayoutGuide.leadingAnchor,
                          bottom: view.bottomAnchor,
                          trailing: view.safeAreaLayoutGuide.trailingAnchor)
-        
-        headerView.heightAnchor.constraint(equalToConstant: 120).isActive = true
         
     }
     
@@ -154,14 +141,16 @@ extension DashboardViewController: ViewConstraintAutoLayoutSetup {
     }
     
     @objc
-    func refreshData() { }
+    func refreshData() {
+        viewModel.load()
+    }
 }
 
 extension DashboardViewController: GenericViewGestureHandler {
 
     func showDetails (content: Content) {
         let detailsVC = DetailsViewController()
-        detailsVC.viewModel = .init(from: content.onClick.urlPage)
+        detailsVC.viewModel = .init(from: content.onClick.urlPage, with: content.onClick.urlPage)
         self.navigationController?.pushViewController(detailsVC, animated: true)
     }
     
