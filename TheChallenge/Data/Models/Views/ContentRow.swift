@@ -8,7 +8,9 @@
 import Foundation
 
 // MARK: - Content
-struct Content: Decodable {
+struct Content: Identifiable, Codable {
+    var id: UUID = { UUID() }()
+    
     let isInOffer: Bool
     let subtitle, contentID: String
     let onClick: OnClick
@@ -25,7 +27,18 @@ struct Content: Decodable {
     }
 }
 
-enum GenericDisplay: String, Decodable {
+extension Content: Hashable {
+    
+    static func == (lhs: Content, rhs: Content) -> Bool {
+        lhs.contentID == rhs.contentID
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(contentID)
+    }
+}
+
+enum GenericDisplay: String, Codable {
     
     case detailPage
     case infoView
@@ -44,7 +57,7 @@ enum GenericDisplay: String, Decodable {
 }
 
 // MARK: - OnClick
-struct OnClick: Decodable {
+struct OnClick: Codable {
     let urlPage: String
     let boName, path, displayName: String
     let displayTemplate: GenericDisplay

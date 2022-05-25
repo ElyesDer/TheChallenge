@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  TheChallenge
+
+  Created by Derouiche Elyes on 24/05/2022.
+  
+*/
+
+search_placeholder = "Chercher un film, serie, ..";

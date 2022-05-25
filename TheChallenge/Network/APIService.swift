@@ -22,8 +22,12 @@ public enum APIProvider {
     
     case movies
     
+    case custom(String)
+    
     var rawValue: String {
         switch self {
+            case .custom(let path):
+                return path
         case .movies:
             return baseUrl + "movies.json"
         }

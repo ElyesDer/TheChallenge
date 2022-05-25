@@ -21,7 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let firstViewController = Inject.ViewControllerHost(DashboardViewController())
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = firstViewController
+        let navController = UINavigationController()
+        navController.navigationItem.largeTitleDisplayMode = .always
+        navController.viewControllers = [firstViewController]
+        navController.navigationBar.tintColor = .white
+        window.rootViewController = navController
         self.window = window
         window.makeKeyAndVisible()
     }

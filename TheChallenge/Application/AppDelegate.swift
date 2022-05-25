@@ -7,12 +7,22 @@
 
 import UIKit
 import CoreData
+import AVFAudio
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // source: https://developer.apple.com/documentation/avfoundation/media_playback_and_selection/configuring_the_audio_playback_of_ios_and_tvos_apps
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback)
+            try audioSession.setActive(true, options: [])
+        } catch {
+            print("Could not enable .playback mode for PIP Support")
+        }
+        
         return true
     }
 
