@@ -119,8 +119,13 @@ struct ReviewView: View {
 
 struct ReviewView_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewView(reviews: [.init(name: "Some cool name", stars: .init(type: "", value: 9.0), review: "Ceci est un long review Ceci est un long review Ceci est un long review Ceci long review Ceci  long review Ceci  long review Ceci  est un long review"),
-                             .init(name: "Some cool name", stars: .init(type: "", value: 9.0), review: "Ceci est un long review Ceci est un long review Ceci est un long review Ceci long review Ceci  long review Ceci  long review Ceci  est un long review"),
-                             .init(name: "Some cool name", stars: .init(type: "", value: 3.0), review: "Ceci est un long review Ceci est un long review Ceci est un long review Ceci long review Ceci  long review Ceci  long review Ceci  est un long review")])
+        ReviewView(reviews: [.init(name: "Some cool name", stars: .init(type: "", value: 9.0),
+                                   review: "Ceci est un long review Ceci est un long review Ceci est un long review Ceci long review Ceci  long review Ceci  long review Ceci  est un long review"),
+                             
+                             .init(name: "Some cool name", stars: .init(type: "", value: 9.0),
+                                   review: "Ceci est un long review Ceci est un long review Ceci est un long review Ceci long review Ceci  long review Ceci  long review Ceci  est un long review"),
+                             
+                             .init(name: "Some cool name", stars: .init(type: "", value: 3.0),
+                                   review: "Ceci est un long review Ceci est un long review Ceci est un long review Ceci long review Ceci  long review Ceci  long review Ceci  est un long review")])
     }
 }
