@@ -45,7 +45,7 @@ struct Personnality: Codable, Identifiable {
     let id: String = UUID().uuidString
     let personnalityPrefix: String
     let personnalitiesList: [String]
-
+    
     enum CodingKeys: String, CodingKey {
         case personnalityPrefix = "prefix"
         case personnalitiesList
@@ -84,12 +84,22 @@ extension Movie: Mockable {
         .init(subtitle: "subtitle", sharingURL: "sharingURL",
               formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title",
               channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [],
-              productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle")
+              productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123",
+              trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
         
-//            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
-//
-//            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
-//
-//            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [], type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
+            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [],
+                  type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary",
+                  imageURL: "imageURL", reviews: [], productionYear: "", parentalRatings: [],
+                  duration: "duration", contentID: "contentID_123", trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
+        
+            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [],
+                  type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL",
+                  reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123",
+                  trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
+        
+            .init(subtitle: "subtitle", sharingURL: "sharingURL", formats: .init(video: [], audio: []), personnalities: [],
+                  type: "type", title: "title", channelLogoURL: "channelLogoURL", summary: "summary", imageURL: "imageURL",
+                  reviews: [], productionYear: "", parentalRatings: [], duration: "duration", contentID: "contentID_123",
+                  trailerURL: "trailerURL", editorialTitle: "editorialTitle"),
     ]
 }

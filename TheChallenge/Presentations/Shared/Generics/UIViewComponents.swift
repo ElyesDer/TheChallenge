@@ -9,9 +9,7 @@ import Foundation
 import UIKit
 
 class UIModel {
-    init() {
-        
-    }
+    init() { }
 }
 
 protocol UIViewComponents: Hashable, AnyObject {

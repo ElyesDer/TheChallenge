@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E907221E28439C24006FA472 /* CacheMangerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E907221D28439C24006FA472 /* CacheMangerTest.swift */; };
+		E907222028439C52006FA472 /* CacheRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E907221F28439C52006FA472 /* CacheRepository.swift */; };
+		E907222328439CE6006FA472 /* CacheProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E907222228439CE6006FA472 /* CacheProviderMock.swift */; };
 		E91A75F7283D455A0008A732 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91A75F6283D455A0008A732 /* PaddingLabel.swift */; };
 		E91A7606283D5AF50008A732 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91A7605283D5AF50008A732 /* CacheManager.swift */; };
 		E91A7609283D5B1D0008A732 /* Files in Frameworks */ = {isa = PBXBuildFile; productRef = E91A7608283D5B1D0008A732 /* Files */; };
@@ -70,6 +73,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E907221D28439C24006FA472 /* CacheMangerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheMangerTest.swift; sourceTree = "<group>"; };
+		E907221F28439C52006FA472 /* CacheRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheRepository.swift; sourceTree = "<group>"; };
+		E907222228439CE6006FA472 /* CacheProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheProviderMock.swift; sourceTree = "<group>"; };
 		E91A75F6283D455A0008A732 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		E91A7605283D5AF50008A732 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		E91A760C283D5BC50008A732 /* MovieRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRepository.swift; sourceTree = "<group>"; };
@@ -146,6 +152,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E907221B28439329006FA472 /* DataRepository */ = {
+			isa = PBXGroup;
+			children = (
+				E907222128439CD9006FA472 /* Mocks */,
+				E907221C28439C08006FA472 /* Caching */,
+			);
+			path = DataRepository;
+			sourceTree = "<group>";
+		};
+		E907221C28439C08006FA472 /* Caching */ = {
+			isa = PBXGroup;
+			children = (
+				E907221D28439C24006FA472 /* CacheMangerTest.swift */,
+			);
+			path = Caching;
+			sourceTree = "<group>";
+		};
+		E907222128439CD9006FA472 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				E907222228439CE6006FA472 /* CacheProviderMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		E91A7604283D5AEA0008A732 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +296,7 @@
 		E9E0D57E283780BF000DA6F6 /* TheChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
+				E907221B28439329006FA472 /* DataRepository */,
 				E9E0D5B528378AF2000DA6F6 /* NetworkLayer */,
 				E9E0D57F283780BF000DA6F6 /* TheChallengeTests.swift */,
 			);
@@ -464,6 +496,7 @@
 			isa = PBXGroup;
 			children = (
 				E9E0D5D42837F6FE000DA6F6 /* Mockable.swift */,
+				E907221F28439C52006FA472 /* CacheRepository.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -646,6 +679,7 @@
 				E9E0D570283780BD000DA6F6 /* TheChallenge.xcdatamodeld in Sources */,
 				E9E0D566283780BD000DA6F6 /* AppDelegate.swift in Sources */,
 				E91A7610283D5D3A0008A732 /* ContentSynchronisation.swift in Sources */,
+				E907222028439C52006FA472 /* CacheRepository.swift in Sources */,
 				E9E0D5B2283789C6000DA6F6 /* Requester.swift in Sources */,
 				E9B2CC96283AF6FB00910781 /* CastView.swift in Sources */,
 				E9E0D5C128379569000DA6F6 /* DashboardViewModel.swift in Sources */,
@@ -680,7 +714,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9E0D5B728378B13000DA6F6 /* RequesterTest.swift in Sources */,
+				E907221E28439C24006FA472 /* CacheMangerTest.swift in Sources */,
 				E9E0D580283780BF000DA6F6 /* TheChallengeTests.swift in Sources */,
+				E907222328439CE6006FA472 /* CacheProviderMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
